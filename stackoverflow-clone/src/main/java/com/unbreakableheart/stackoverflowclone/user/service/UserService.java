@@ -1,5 +1,7 @@
 package com.unbreakableheart.stackoverflowclone.user.service;
 
+import com.unbreakableheart.stackoverflowclone.common.exception.CustomException;
+import com.unbreakableheart.stackoverflowclone.common.exception.ExceptionCode;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import com.unbreakableheart.stackoverflowclone.user.repository.UserRepository;
 import lombok.Getter;
@@ -26,7 +28,7 @@ public class UserService {
     private void verifyExistUser(String email) {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {
-            throw new IllegalArgumentException();
+            throw new CustomException(ExceptionCode.MEMBER_EMAIL_EXISTS);
         }
     }
 
@@ -54,6 +56,6 @@ public class UserService {
 
     private User findVerifyUser(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new CustomException(ExceptionCode.MEMBER_NOT_FOUND));
     }
 }
