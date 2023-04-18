@@ -1,5 +1,6 @@
 package com.unbreakableheart.stackoverflowclone.question.entity;
 
+import com.unbreakableheart.stackoverflowclone.common.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,8 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
-public class Question {
+public class Question extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,46 +28,67 @@ public class Question {
 
 //    외래키
 
-    @JoinColumn(name = "MEMBER_ID")
+    @JoinColumn(name = "USER_ID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private User user;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
     private List<Answer> answers;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
     private List<Vote> votes;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
     private List<Tag> tags;
 
 
 //    연관관계 설정 메서드
-    public void setMember(Member member) {
-        this.member = member;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setComment(Comment comment) {
+    public void addComment(Comment comment) {
         comments.add(comment);
         comment.setQuestion(this);
     }
 
-    public void setAnswer(Answer answer) {
+    public void addAnswer(Answer answer) {
         answers.add(answer);
         answer.setQuestion(this);
     }
 
-    public void setVote(Vote vote) {
+    public void addVote(Vote vote) {
         votes.add(vote);
         vote.setQuestion(this);
     }
 
-    public void setTag(Tag tag) {
+    public void addTag(Tag tag) {
         tags.add(tag);
         tag.setQuestion(this);
+    }
+
+    public void setTag(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    private Question(String title, String content, int views, QuestionStatus questionStatus) {
+        this.title = title;
+        this.content = content;
+        this.views = views;
+        this.questionStatus = questionStatus;
+    }
+
+    public static Question makeQuestion(String title, String content) {
+        Question madequestion = new Question(title, content, 0 , QuestionStatus.QUESTION_REGISTERED);
+        return madequestion;
+    }
+
+    public void updateQuestion(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 
     public enum QuestionStatus{

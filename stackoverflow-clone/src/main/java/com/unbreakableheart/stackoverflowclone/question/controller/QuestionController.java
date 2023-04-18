@@ -1,5 +1,7 @@
 package com.unbreakableheart.stackoverflowclone.question.controller;
 
+import com.unbreakableheart.stackoverflowclone.common.response.SingleResponse;
+import com.unbreakableheart.stackoverflowclone.common.utils.UriCreator;
 import com.unbreakableheart.stackoverflowclone.question.dto.QuestionDto;
 import com.unbreakableheart.stackoverflowclone.question.entity.Question;
 import com.unbreakableheart.stackoverflowclone.question.mapper.QuestionMapper;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.net.URI;
 
 @RestController
 @RequestMapping("/questions")
@@ -21,6 +24,8 @@ import javax.validation.constraints.Positive;
 @RequiredArgsConstructor
 public class QuestionController {
 
+    private final static String ORDER_DEFAULT_URL = "/questions";
+
     private final QuestionService questionService;
     private final QuestionMapper mapper;
 
@@ -28,11 +33,9 @@ public class QuestionController {
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post requestBody) {
 
         Question question = questionService.createQuestion(mapper.questionPostToQuestion(requestBody));
+        URI location = UriCreator.createURI(question.getId());
 
-
-
-        return ResponseEntity.created().build();
-
+        return ResponseEntity.created(location).build();
     }
 
     @PatchMapping("/{question-id}/title")
@@ -41,9 +44,9 @@ public class QuestionController {
             @Valid @RequestBody QuestionDto.Patch requestBody
     ) {
         requestBody.setQuestionId(questionId);
-        Question question = questionService.updateQuestion(mapper.questionPatchToQuestion(requestBody));
+        Question question = questionService.updateQuestion(mapper.questionPatchToQuestion(requestBody),questionId);
 
-        return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponse<>(mapper.questionToQuestionResponse(question)), HttpStatus.OK);
     }
 
     @GetMapping("/{question-id}/title")
@@ -52,7 +55,7 @@ public class QuestionController {
     ) {
         Question question = questionService.findQuestion(questionId);
 
-        return new ResponseEntity<>(mapper.questionToQuestionResponse(question), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponse<>(mapper.questionToQuestionResponse(question)), HttpStatus.OK);
     }
 
 }

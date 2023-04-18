@@ -15,18 +15,26 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
+    private final UserService userService;
+
+    private final TagRepository tagRepository;
+
 
     @Transactional
     public Question createQuestion(Question question) {
-        //Exception
-        //1.Member Exist.
-        //2.Member is not Admin
+        verifyPostQuestion(question);
 
         //Logic
-        question.setQuestionStatus(Question.QuestionStatus.QUESTION_REGISTERED);
-        Question savedQuestion = questionRepository.save(question);
+        //1. USER
+        User foundUser = userService.findUser(question.getUser().getUserId());
+        question.setUser(foundUser);
+        //2. Tag
 
-        //Tag?? Service 불러서 저장해야하나?
+
+
+
+
+        Question savedQuestion = questionRepository.save(question);
 
 
         //Return
@@ -34,8 +42,49 @@ public class QuestionService {
     }
 
 
+
     @Transactional
-    public Question updateQuestion(Question question) {
+    public Question updateQuestion(Question question, Long questionId) {
+        verifyPatchQuestion(question, questionId);
+
+        //Logic
+        Question foundQuestion = questionRepository.findById(questionId).get();
+        foundQuestion.updateQuestion(question.getTitle(), question.getContent());
+
+        //Tag변경 로직 필요함
+
+
+        //Return
+        return foundQuestion;
+    }
+
+    public Question findQuestion(Long questionId) {
+        //Exception
+        //1. Question Exist
+        verifyGetQuestion(questionId);
+
+        //Logic
+        Optional<Question> optionalQuestion = questionRepository.findById(questionId);
+        Question question = optionalQuestion.orElseThrow(() -> ());
+
+        //Return
+        return question;
+    }
+
+    private void verifyGetQuestion(Long questionId) {
+
+    }
+
+
+    private void verifyPostQuestion(Question question) {
+        //Exception
+        //1.Member Exist.
+        //2.Member is not Admin
+
+    }
+
+    private void verifyPatchQuestion(Question question, Long questionId) {
+
         //Exception
         //1. Member Exist
         //2. Member is the writer
@@ -43,16 +92,5 @@ public class QuestionService {
         //3. Question Not Answered
         //4. Question Not Deleted
 
-
-        //Logic
-        Question foundQuestion = questionRepository.findById(question.getId()).get();
-        foundQuestion.setTitle(question.getTitle());
-        foundQuestion.setContent(question.getContent());
-
-        //Tag?? Service 불러서 변경해야하나?
-
-
-        //Return
-        return foundQuestion;
     }
 }
