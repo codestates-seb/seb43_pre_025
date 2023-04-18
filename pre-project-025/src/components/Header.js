@@ -92,7 +92,7 @@ function Header() {
                 <ul className="gnb">
                     <li>About</li>
                     <li>Products</li>
-                    <li>ForTeams</li>
+                    <li>For Teams</li>
                 </ul>
                 <Search/>
                 <div className="button-container">

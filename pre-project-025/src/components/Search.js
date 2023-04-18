@@ -1,9 +1,18 @@
 import styled from 'styled-components';
-import {AiOutlineSearch} from 'react-icons/ai';
+import SearchIcon from '../assets/search.png';
 
 const SearchContainer = styled.form`
   position: relative;
   flex-grow: 1;
+
+  img {
+    position: absolute;
+    left: 0.5em;
+    top: 50%;
+    margin-top: -9px;
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 const SearchBar = styled.input`
@@ -17,15 +26,17 @@ const SearchBar = styled.input`
   padding: 0.6em 0.7em;
   padding-left: 32px;
   outline: none;
+  border-color: hsl(210, 8%, 75%);
   &:focus {
-    box-shadow: 0px 0px 0px 4px;
-    border-color: blue;
+    box-shadow: 0px 0px 0px 2px hsl(206, 90%, 70%);
+    border-color: hsl(205, 100%, 66%);
   }
 `;
 
 function Search() {
 return (
     <SearchContainer>
+        <img src={SearchIcon} alt="icon" />
       <SearchBar placeholder="Search..." />
     </SearchContainer>
   );
