@@ -4,7 +4,9 @@ import com.unbreakableheart.stackoverflowclone.common.exception.CustomException;
 import com.unbreakableheart.stackoverflowclone.common.exception.ExceptionCode;
 import com.unbreakableheart.stackoverflowclone.question.entity.Question;
 import com.unbreakableheart.stackoverflowclone.question.repository.QuestionRepository;
+import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
 import com.unbreakableheart.stackoverflowclone.tag.repository.TagRepository;
+import com.unbreakableheart.stackoverflowclone.tag.service.TagService;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import com.unbreakableheart.stackoverflowclone.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +16,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -25,7 +30,7 @@ public class QuestionService {
 
     private final UserService userService;
 
-    private final TagRepository tagRepository;
+    private final TagService tagService;
 
 
     public Question createQuestion(Question question) {
@@ -34,28 +39,50 @@ public class QuestionService {
         //Logic
         User foundUser = userService.findUser(question.getUser().getId());
         question.setUser(foundUser);
-        //Tag 로직 필요함//
 
+
+        //Tag 로직 필요함//
+        //1. 이름을 통해서 생성하여 ID값을 반환
+        //2. 얻은 ID값을 통해서 questionTag 객체 생성
+        List<QuestionTag> newQuestionTags = getQuestionTags(question);
         /////////////////
 
-        Question savedQuestion = questionRepository.save(question);
 
+
+        Question savedQuestion = questionRepository.save(question);
+        savedQuestion.setQuestionTags(newQuestionTags);
 
         return savedQuestion;
     }
 
+    private List<QuestionTag> getQuestionTags(Question question) {
+        List<QuestionTag> questionTags = question.getQuestionTags();
+        List<Long> tagIds = questionTags.stream().map(qt -> tagService.createTagByName(qt.getName())).collect(Collectors.toList());
+
+        List<QuestionTag> newQuestionTags = new ArrayList<>();
+        for (Long tagId : tagIds) {
+            QuestionTag questionTag = new QuestionTag();
+            questionTag.setQuestion(question);
+            questionTag.setTag(tagService.findTag(tagId));
+            newQuestionTags.add(questionTag);
+        }
+        return newQuestionTags;
+    }
 
 
     public Question updateQuestion(Question question, Long questionId) {
         verifyPatchQuestion(question, questionId);
 
-        //Logic
+        //    Logic
+        //Question 변경 로직//
         Question foundQuestion = questionRepository.findById(questionId).get();
         foundQuestion.updateQuestion(question.getTitle(), question.getContent());
 
-        //Tag변경 로직 필요함//
-
+        //Tag 변경 로직 //
+        List<QuestionTag> newQuestionTags = getQuestionTags(question);
+        foundQuestion.setQuestionTags(newQuestionTags);
         ////////////////////
+
 
         return foundQuestion;
     }
