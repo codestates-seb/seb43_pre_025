@@ -12,7 +12,6 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 1px 1px hsl(0, 0%, 0%);
 
     .header-container {
     width: 1264px;
