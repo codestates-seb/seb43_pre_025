@@ -2,8 +2,12 @@ package com.unbreakableheart.stackoverflowclone.question.mapper;
 
 import com.unbreakableheart.stackoverflowclone.question.dto.QuestionDto;
 import com.unbreakableheart.stackoverflowclone.question.entity.Question;
+import com.unbreakableheart.stackoverflowclone.user.dto.UserDto;
+import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionMapper {
@@ -12,7 +16,7 @@ public interface QuestionMapper {
 
         //외래키 엔티티 생성
         User user = new User();
-        user.setUserId(requestBody.getUserId());
+        user.setId(requestBody.getUserId());
 
         //기본 질문 등록
         Question question = Question.makeQuestion(requestBody.getTitle(), requestBody.getContent());
@@ -27,10 +31,12 @@ public interface QuestionMapper {
     default Question questionPatchToQuestion(QuestionDto.Patch requestBody){
 
         User user = new User();
-        user.setUserId(requestBody.getUserId());
+        user.setId(requestBody.getUserId());
 
         Question question = Question.makeQuestion(requestBody.getTitle(), requestBody.getContent());
         question.setUser(user);
+
+        return question;
     };
 
     default QuestionDto.Response questionToQuestionResponse(Question question){
@@ -38,7 +44,7 @@ public interface QuestionMapper {
         return new QuestionDto.Response(
                 question.getTitle(),
                 question.getContent(),
-                question.getUser().getUserId(),
+                question.getUser().getId(),
                 question.getComments(),
                 question.getAnswers(),
                 question.getVotes(),
@@ -46,5 +52,6 @@ public interface QuestionMapper {
         );
     };
 
+    List<QuestionDto.Response> questionsToQuestionDtoResponses(List<Question> questions);
 
 }

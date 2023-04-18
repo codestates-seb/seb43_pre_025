@@ -1,6 +1,8 @@
 package com.unbreakableheart.stackoverflowclone.question.entity;
 
 import com.unbreakableheart.stackoverflowclone.common.entity.BaseEntity;
+import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
+import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +26,7 @@ public class Question extends BaseEntity {
     @Column(nullable = false)
     private int views;
 
+    @Setter
     private QuestionStatus questionStatus;
 
 //    외래키
@@ -89,6 +92,10 @@ public class Question extends BaseEntity {
     public void updateQuestion(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public void viewIncrease() {
+        this.views += 1;
     }
 
     public enum QuestionStatus{

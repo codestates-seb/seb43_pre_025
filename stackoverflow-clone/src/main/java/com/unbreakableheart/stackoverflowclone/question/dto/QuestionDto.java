@@ -1,5 +1,6 @@
 package com.unbreakableheart.stackoverflowclone.question.dto;
 
+import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class QuestionDto {
     @Getter
     @Setter
     @AllArgsConstructor
+
     public static class Response {
 
         private String title;
