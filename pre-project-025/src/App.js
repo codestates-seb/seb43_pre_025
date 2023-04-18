@@ -1,16 +1,17 @@
+import Header from "./components/Header";
+import Questions from "./components/Questions";
 import { createGlobalStyle } from "styled-components";
-import Questions from "./components/Quetions";
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background: aliceblue;
-  }
-`;
-
+const GlobalStyles = createGlobalStyle`
+  body{
+    width: 100%;
+    background-color: white;
+  }`;
 function App() {
   return (
     <div>
-      <GlobalStyle />
+      <GlobalStyles />
+      <Header />
       <Questions />
     </div>
   );
