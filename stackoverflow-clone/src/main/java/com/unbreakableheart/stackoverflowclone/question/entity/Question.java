@@ -1,5 +1,6 @@
 package com.unbreakableheart.stackoverflowclone.question.entity;
 
+import com.unbreakableheart.stackoverflowclone.answer.entity.Answer;
 import com.unbreakableheart.stackoverflowclone.common.entity.BaseEntity;
 import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
 import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
@@ -40,15 +41,15 @@ public class Question extends BaseEntity {
     @JoinColumn(name = "USER_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
-    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
-    private List<Comment> comments = new ArrayList<>();
-
     @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
     private List<Answer> answers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
-    private List<Vote> votes = new ArrayList<>();
+//    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
+//    private List<Comment> comments = new ArrayList<>();
+//
+//
+//    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
+//    private List<Vote> votes = new ArrayList<>();
 
 
 
@@ -58,29 +59,30 @@ public class Question extends BaseEntity {
         this.user = user;
     }
 
-    public void addComment(Comment comment) {
-        comments.add(comment);
-        comment.setQuestion(this);
-    }
+//    public void addComment(Comment comment) {
+//        comments.add(comment);
+//        comment.setQuestion(this);
+//    }
 
     public void addAnswer(Answer answer) {
-        answers.add(answer);
-        answer.setQuestion(this);
+        if(!answers.contains(answer)){
+           answers.add(answer);
+        }
     }
 
-    public void addVote(Vote vote) {
-        votes.add(vote);
-        vote.setQuestion(this);
-    }
+//    public void addVote(Vote vote) {
+//        votes.add(vote);
+//        vote.setQuestion(this);
+//    }
+//
+//    public void addTag(Tag tag) {
+//        tags.add(tag);
+//        tag.setQuestion(this);
+//    }
 
-    public void addTag(Tag tag) {
-        tags.add(tag);
-        tag.setQuestion(this);
-    }
-
-    public void setTag(List<Tag> tags) {
-        this.tags = tags;
-    }
+//    public void setTag(List<Tag> tags) {
+//        this.tags = tags;
+//    }
 
     private Question(String title, String content, int views, QuestionStatus questionStatus) {
         this.title = title;
