@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import Nav from "./components/Nav";
 import Questions from "./components/Questions";
 import { createGlobalStyle } from "styled-components";
 
@@ -12,6 +13,7 @@ function App() {
     <div>
       <GlobalStyles />
       <Header />
+      <Nav />
       <Questions />
     </div>
   );
