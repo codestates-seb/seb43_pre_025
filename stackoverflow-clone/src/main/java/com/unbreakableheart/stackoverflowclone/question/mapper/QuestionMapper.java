@@ -24,14 +24,14 @@ public interface QuestionMapper {
         //기본 질문 등록
         Question question = Question.makeQuestion(requestBody.getTitle(), requestBody.getContent());
 
-        List<QuestionTag> questionTags = requestBody.getQuestionTags().stream().map(name -> {
-             return new QuestionTag(name.getName());
-        }).collect(Collectors.toList());
+//        List<QuestionTag> questionTags = requestBody.getQuestionTags().stream().map(name -> {
+//             return new QuestionTag(name.getName());
+//        }).collect(Collectors.toList());
 
         //질문에 유저 등록
         //질문에 태그 등록]
         question.setUser(user);
-        question.setQuestionTags(questionTags);
+//        question.setQuestionTags(questionTags);
 
         return question;
     };
@@ -53,13 +53,14 @@ public interface QuestionMapper {
         }).collect(Collectors.toList());
 
         return new QuestionDto.Response(
+                question.getId(),
                 question.getTitle(),
                 question.getContent(),
-                question.getUser().getId(),
-                question.getComments(),
-                question.getAnswers(),
-                question.getVotes(),
-                questionTagResponse
+                question.getUser().getId()
+//                question.getComments(),
+//                question.getAnswers(),
+//                question.getVotes(),
+//                questionTagResponse()
         );
     };
 

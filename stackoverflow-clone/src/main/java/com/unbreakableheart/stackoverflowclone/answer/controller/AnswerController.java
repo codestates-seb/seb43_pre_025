@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/questions/{question-id}")
+@RequestMapping("/answers")
 public class AnswerController {
 
     private final AnswerService answerService;
@@ -28,23 +28,7 @@ public class AnswerController {
         this.answerMapper = answerMapper;
     }
 
-    @PostMapping("/{question-id}/answers")
-    public ResponseEntity postAnswer(@PathVariable("question-id") long questionId,
-                                     @RequestBody AnswerDto.Post answerPostDto) {
-
-        answerService.createAnswer(answerMapper.answerPostDtoToAnswer(answerPostDto));
-//        Answer answer = answerMapper.answerPostDtoToAnswer(answerPostDto);
-//        answer.setQuestionId(questionId);
-//        answerService.createAnswer(answer);\
-
-//        URI uri = UriComponentsBuilder.newInstance().build(DEFAULT_ANSWER_URI);
-        URI uri = UriCreator.createURI(questionId);
-        return ResponseEntity.created(uri).build();
-
-
-    }
-
-    @PatchMapping("/answer/{answer-id}")
+    @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") long answerId,
                                       @RequestBody AnswerDto.Patch answerPatchDto) {
 
@@ -53,7 +37,6 @@ public class AnswerController {
         AnswerDto.Response response = answerMapper.answerToAnswerDtoResponse(answer);
         return ResponseEntity.ok().build();
     }
-
 
     @GetMapping
     public ResponseEntity getAnswers(@RequestParam @Positive int page,

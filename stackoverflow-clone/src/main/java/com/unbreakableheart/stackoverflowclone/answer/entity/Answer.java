@@ -24,7 +24,7 @@ public class Answer extends BaseEntity {
     private String content;
 
     @Column(name = "IS_ACCEPTED", nullable = false)
-    private Boolean isAccepted;
+    private Boolean isAccepted = false;
 
     // FK
     @ManyToOne
@@ -39,6 +39,12 @@ public class Answer extends BaseEntity {
         if(this.question == null){
             this.question = question;
             question.addAnswer(this);
+        }
+    }
+
+    public void addUser(User user){
+        if(this.user == null){
+            this.user = user;
         }
     }
 

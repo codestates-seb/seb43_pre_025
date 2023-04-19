@@ -36,13 +36,17 @@ public class Question extends BaseEntity {
 //    외래키
 
     @Setter
-    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<QuestionTag> questionTags = new ArrayList<>();
     @JoinColumn(name = "USER_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<Answer> answers = new ArrayList<>();
+
+    public void addQuestionId(Long questionId){
+        this.id = questionId;
+    }
 
 //    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
 //    private List<Comment> comments = new ArrayList<>();
@@ -52,9 +56,7 @@ public class Question extends BaseEntity {
 //    private List<Vote> votes = new ArrayList<>();
 
 
-
-
-//    연관관계 설정 메서드
+    //    연관관계 설정 메서드
     public void setUser(User user) {
         this.user = user;
     }
@@ -65,8 +67,8 @@ public class Question extends BaseEntity {
 //    }
 
     public void addAnswer(Answer answer) {
-        if(!answers.contains(answer)){
-           answers.add(answer);
+        if (!answers.contains(answer)) {
+            answers.add(answer);
         }
     }
 
@@ -92,7 +94,7 @@ public class Question extends BaseEntity {
     }
 
     public static Question makeQuestion(String title, String content) {
-        Question madequestion = new Question(title, content, 0 , QuestionStatus.QUESTION_REGISTERED);
+        Question madequestion = new Question(title, content, 0, QuestionStatus.QUESTION_REGISTERED);
         return madequestion;
     }
 
@@ -105,7 +107,7 @@ public class Question extends BaseEntity {
         this.views += 1;
     }
 
-    public enum QuestionStatus{
+    public enum QuestionStatus {
         QUESTION_REGISTERED("질문 등록"),
         QUESTION_ANSWERED("답변 완료"),
         QUESTION_DELETED("질문 삭제");
@@ -113,10 +115,10 @@ public class Question extends BaseEntity {
         @Getter
         public String status;
 
-    QuestionStatus(String status) {
-        this.status = status;
+        QuestionStatus(String status) {
+            this.status = status;
+        }
     }
-}
 
 
 }

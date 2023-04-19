@@ -24,8 +24,6 @@ public class QuestionDto {
 
         private String content;
 
-        private List<QuestionTagDto.Post> questionTags;
-
     }
     @Getter
     @AllArgsConstructor
@@ -39,7 +37,7 @@ public class QuestionDto {
 
         private String content;
 
-        private List<QuestionTagDto.Patch> questionTags;
+//        private List<QuestionTagDto.Patch> questionTags;
 
         public void setQuestionId(Long questionId) {
             this.questionId = questionId;
@@ -52,19 +50,20 @@ public class QuestionDto {
 
     public static class Response {
 
+        private Long questionId;
         private String title;
 
         private String Content;
 
         private Long userId;
 
-        private List<Comment> comments;
+//        private List<Comment> comments;
+//
+//        private List<Answer> answers;
+//
+//        private List<Vote> votes;
 
-        private List<Answer> answers;
-
-        private List<Vote> votes;
-
-        private List<QuestionTagDto.Response> questionTags;
+//        private List<QuestionTagDto.Response> questionTags;
     }
 }
 

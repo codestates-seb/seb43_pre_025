@@ -10,9 +10,12 @@ public class AnswerDto {
     @Getter
     @AllArgsConstructor
     public static class Post {
+        private Long questionId;
         private String content;
         private Long userId;
-        private Long questionId;
+        public void addQuestionId(Long questionId){
+            this.questionId = questionId;
+        }
     }
 
     @Getter
