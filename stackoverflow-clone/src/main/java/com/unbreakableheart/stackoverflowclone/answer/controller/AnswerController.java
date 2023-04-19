@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.constraints.Positive;
 import java.net.URI;
@@ -36,8 +37,10 @@ public class AnswerController {
 //        answer.setQuestionId(questionId);
 //        answerService.createAnswer(answer);\
 
+//        URI uri = UriComponentsBuilder.newInstance().build(DEFAULT_ANSWER_URI);
         URI uri = UriCreator.createURI(questionId);
         return ResponseEntity.created(uri).build();
+
 
     }
 
@@ -57,7 +60,7 @@ public class AnswerController {
                                      @RequestParam @Positive int size) {
         Page<Answer> answerPage = answerService.findAnswers(page - 1, size);
         List<AnswerDto.Response> response = answerMapper.answersToAnswerDtoResponses(answerPage.getContent());
-        return ResponseEntity.ok(new MultiResponse<>(response,answerPage));
+        return ResponseEntity.ok(new MultiResponse<>(answerPage, response));
     }
 
     @DeleteMapping("/{answer-id}")

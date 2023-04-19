@@ -2,6 +2,10 @@ package com.unbreakableheart.stackoverflowclone.answer.service;
 
 import com.unbreakableheart.stackoverflowclone.answer.entity.Answer;
 import com.unbreakableheart.stackoverflowclone.answer.repository.AnswerRepository;
+import com.unbreakableheart.stackoverflowclone.question.entity.Question;
+import com.unbreakableheart.stackoverflowclone.question.service.QuestionService;
+import com.unbreakableheart.stackoverflowclone.user.entity.User;
+import com.unbreakableheart.stackoverflowclone.user.service.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -10,9 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnswerService {
     private final AnswerRepository answerRepository;
-//    private final QuestionService questionService;
-//
-//    private final UserService userService;
+    private final QuestionService questionService;
+    private final UserService userService;
 
 
     public AnswerService(AnswerRepository answerRepository, QuestionService questionService, UserService userService) {
@@ -22,12 +25,12 @@ public class AnswerService {
     }
 
     public Answer createAnswer(Answer answer) {
-        userService.findUser(answer.getUser().getUserId());
+        userService.findUser(answer.getUser().getId());
 
         Question question =
-                questionService.findQuestion(answer.getQuestion().getQuetionId(), answer.getUser().getUserId);
+                questionService.findQuestion(answer.getQuestion().getId());
 
-        answer.setQuestion(question);
+        answer.addQuestion(question);
 
         return answerRepository.save(answer);
     }
