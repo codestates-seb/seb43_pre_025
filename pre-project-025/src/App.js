@@ -1,19 +1,15 @@
-import Header from "./components/Header";
-import Questions from "./components/Questions";
-import { createGlobalStyle } from "styled-components";
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
+import Login from './components/Login';
 
-const GlobalStyles = createGlobalStyle`
-  body{
-    width: 100%;
-    background-color: white;
-  }`;
 function App() {
   return (
-    <div>
-      <GlobalStyles />
+    <>
       <Header />
-      <Questions />
-    </div>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   );
 }
 
