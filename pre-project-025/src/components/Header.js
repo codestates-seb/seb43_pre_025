@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import mainLogo from '../assets/logo.png';
+import Search from './Search';
 
 const StyledHeader = styled.header`
     width: 100%;
@@ -11,7 +12,6 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 1px 1px hsl(0, 0%, 0%);
 
     .header-container {
     width: 1264px;
@@ -21,82 +21,84 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
 
-    .logo {
-      height: 100%;
-      margin: 0;
-      padding: 0 8px;
+      .gnb {
       display: flex;
       align-items: center;
-    }
-    .logo-img {
-        display: block;
-        width: 150px;
-        height: 30px;
-        margin-top: -4px;
-        background: url(${mainLogo}) 0 -500px no-repeat;
+      padding: 2px;
+      margin: 3px;
+      color: black;
+      font-size: 13px;
+
+      li {
+        padding: 6px 12px;
+        margin: 2px;
+        list-style:none;
       }
     }
+
+    .button-container {
+      display: flex;
+    }
+    .button-container button {
+      padding: 8px 10px;
+    }
+}
 `;
-
-
-const HeaderMenu = styled.div`
-    text-align: center;
-    font-size: 8px;
-    padding: 10px;
-`
-
-const SearchInput = styled.input`
-    display: inline-block;
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 3px;
-    border: 1px solid black;
-    background: rgba(0, 0, 0, .1);
-    padding: 8px 10px;
-    margin-top: 9px;
-`
 
 const LoginButton = styled.button`
     background-color: hsl(205, 46%, 92%);
-    padding: 8px 10px;
-    margin-top: 9px;
+    padding: 10px;
+    margin: 4px;
+    width: 70px;
     border: 1px solid black;
     color: hsl(205, 47%, 42%);
     text-align: center;
-    font-size: 4px;
+    font-size: 13px;
     border-radius: 3px;
     border-color: hsl(205, 41%, 63%);
     &:hover {
         background-color: #99c4e4;
     }
-`
+`;
 
 const SignButton = styled.button`
     background-color: hsl(206, 100%, 52%);
-    padding: 8px 10px;
-    margin-top: 9px;
+    padding: 10px;
+    margin: 4px;
+    width: 70px;
     border: 1px solid hsl(206, 100%, 52%);
     color: hsl(0, 0%, 100%);
     text-align: center;
-    font-size: 4px;
+    font-size: 13px;
     border-radius: 3px;
     &:hover {
         background-color: #3388c8;
     }
+`;
+
+const LogoImg = styled.img`
+        display: block;
+        width: 150px;
+        height: 30px;
+        margin-top: -4px;
 `
 
 function Header() {
     return (
         <StyledHeader>
-        <div className='header-container'>
-            <img src={mainLogo} alt="logo" />
-            <HeaderMenu>About Products For Teams</HeaderMenu>
-            <form action='' className='search'>
-                <SearchInput type="text" placeholder='Search...'/>
-            </form>
-            <LoginButton>Log in</LoginButton>
-            <SignButton>Sign up</SignButton>
-        </div>
+            <div className='header-container'>
+            <LogoImg src={mainLogo} alt="logo" />
+                <ul className="gnb">
+                    <li>About</li>
+                    <li>Products</li>
+                    <li>For Teams</li>
+                </ul>
+                <Search/>
+                <div className="button-container">
+                    <LoginButton>Log in</LoginButton>
+                    <SignButton>Sign up</SignButton>
+                </div>
+            </div>
         </StyledHeader>
     )
 }
