@@ -35,6 +35,13 @@ public class Answer extends BaseEntity {
     @JoinColumn(name = "USER_ID")
     private User user;
 
+    public void addQuestion(Question question){
+        if(this.question == null){
+            this.question = question;
+            question.addAnswer(this);
+        }
+    }
+
     public Answer() {}
 
     public Answer(String content, User user, Question question) {
@@ -55,8 +62,6 @@ public class Answer extends BaseEntity {
 
         AnswerStatus(String status) {
             this.status = status;
-
         }
     }
-
 }

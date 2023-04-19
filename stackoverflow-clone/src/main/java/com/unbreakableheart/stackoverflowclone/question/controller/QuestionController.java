@@ -28,7 +28,6 @@ import java.util.List;
 public class QuestionController {
 
     private final static String ORDER_DEFAULT_URL = "/questions";
-
     private final QuestionService questionService;
     private final QuestionMapper mapper;
 
