@@ -1,6 +1,7 @@
 package com.unbreakableheart.stackoverflowclone.question.entity;
 
 import com.unbreakableheart.stackoverflowclone.common.entity.BaseEntity;
+import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
 import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,6 +18,7 @@ import java.util.List;
 public class Question extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "QUESTION_ID")
     private Long id;
 
     @Column(nullable = false)
@@ -31,21 +34,23 @@ public class Question extends BaseEntity {
 
 //    외래키
 
+    @Setter
+    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
+    private List<QuestionTag> questionTags = new ArrayList<>();
     @JoinColumn(name = "USER_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
-    private List<Answer> answers;
+    private List<Answer> answers = new ArrayList<>();
 
     @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
-    private List<Vote> votes;
+    private List<Vote> votes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
-    private List<Tag> tags;
+
 
 
 //    연관관계 설정 메서드

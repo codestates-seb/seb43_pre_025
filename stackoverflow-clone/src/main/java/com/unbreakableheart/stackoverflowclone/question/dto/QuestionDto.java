@@ -1,5 +1,7 @@
 package com.unbreakableheart.stackoverflowclone.question.dto;
 
+import com.unbreakableheart.stackoverflowclone.tag.dto.QuestionTagDto;
+import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
 import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class QuestionDto {
 
         private String content;
 
-        private List<String> tags;
+        private List<QuestionTagDto.Post> questionTags;
 
     }
     @Getter
@@ -36,6 +38,8 @@ public class QuestionDto {
         private String title;
 
         private String content;
+
+        private List<QuestionTagDto.Patch> questionTags;
 
         public void setQuestionId(Long questionId) {
             this.questionId = questionId;
@@ -60,7 +64,7 @@ public class QuestionDto {
 
         private List<Vote> votes;
 
-        private List<Tag> tags;
+        private List<QuestionTagDto.Response> questionTags;
     }
 }
 

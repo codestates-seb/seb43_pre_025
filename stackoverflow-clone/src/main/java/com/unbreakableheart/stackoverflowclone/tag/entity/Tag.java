@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,18 +16,24 @@ public class Tag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "TAG_ID")
     private Long id;
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MEMBER_ID")
-    @Setter
-    private Question question;
-
-
-    public Tag(String name, Question question) {
+    public Tag(String name) {
         this.name = name;
-        this.question = question;
     }
+
+    //    @OneToMany(mappedBy ="tag")
+//    @JoinColumn(name = "MEMBER_ID")
+//    @Setter
+//    private List<QuestionTag> questionTags = new ArrayList<>();
+
+
+//    public Tag(String name, Question question) {
+//        this.name = name;
+//        this.question = question;
+//    }
 }
+
