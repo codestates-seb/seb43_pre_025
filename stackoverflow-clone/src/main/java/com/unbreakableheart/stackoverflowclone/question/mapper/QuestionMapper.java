@@ -48,6 +48,9 @@ public interface QuestionMapper {
     };
 
     default QuestionDto.Response questionToQuestionResponse(Question question){
+        List<QuestionTagDto.Response> questionTagResponse = question.getQuestionTags().stream().map(a -> {
+            return new QuestionTagDto.Response(a.getId(), a.getName());
+        }).collect(Collectors.toList());
 
         return new QuestionDto.Response(
                 question.getTitle(),
@@ -56,7 +59,7 @@ public interface QuestionMapper {
                 question.getComments(),
                 question.getAnswers(),
                 question.getVotes(),
-                new QuestionTagDto.Response()
+                questionTagResponse
         );
     };
 

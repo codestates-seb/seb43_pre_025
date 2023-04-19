@@ -4,6 +4,8 @@ import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
 import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
 import com.unbreakableheart.stackoverflowclone.tag.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,12 +41,22 @@ public class TagService {
         return true;
     }
 
-    public Tag findTag(Long tagId) {
+    public Tag findTagAlways(Long tagId) {
         return tagRepository.findById(tagId).get();
     }
 
-    @Transactional
-    public List<Long> createTagByNames(List<Tag> tags) {
-        return tags.stream().map(tag -> createTagByName(tag.getName())).collect(Collectors.toList());
+
+    public Page<Tag> findTags(int page, int size) {
+        PageRequest pageImpl = PageRequest.of(page, size);
+        Page<Tag> pageTags = tagRepository.findAll(pageImpl);
+
+        return pageTags;
     }
+
+
+
+//    @Transactional
+//    public List<Long> createTagByNames(List<Tag> tags) {
+//        return tags.stream().map(tag -> createTagByName(tag.getName())).collect(Collectors.toList());
+//    }
 }

@@ -63,7 +63,7 @@ public class QuestionService {
         for (Long tagId : tagIds) {
             QuestionTag questionTag = new QuestionTag();
             questionTag.setQuestion(question);
-            questionTag.setTag(tagService.findTag(tagId));
+            questionTag.setTag(tagService.findTagAlways(tagId));
             newQuestionTags.add(questionTag);
         }
         return newQuestionTags;
