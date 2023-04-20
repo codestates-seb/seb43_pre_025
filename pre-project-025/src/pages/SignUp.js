@@ -1,16 +1,17 @@
 import styled from "styled-components";
+import SocialSignup from "./SocialSignup";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: hsl(210, 8%, 95%);
+  background-color: white;
 `;
 
 const RegistrationWindow = styled.div`
   width: 300px;
-  height: 430px;
   padding: 24px;
   background-color: #fff;
   border-radius: 10px;
@@ -25,15 +26,16 @@ const InputContainer = styled.div`
 `;
 
 const InputLabel = styled.label`
-      font-size: 15px;
-      font-weight: bold;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 2px;
 `;
 
 const PasswordRule = styled.p`
-  width: 240px;
-  font-size: 12px;
-  color: hsl(210, 8%, 45%);
-  margin-bottom: 3px;
+    font-size: 13px;
+    font-weight: 400;
+    color: black;
+    margin: 0px 0px 20px 3px;
 `;
 
 const InputField = styled.input`
@@ -64,23 +66,24 @@ const SignupButton = styled.button`
   border: 1px solid hsl(206, 100%, 52%);
 `;
 
-const PolicyLinks = styled.div`
-  margin-top: 10px;
-  font-size: 12px;
-  width: 270px;
-`;
+// const PolicyLinks = styled.div`
+//     font-size: small;
+//     color: black;
+//     margin: 30px 3px 10px 3px;
+// `;
 
-const PolicyLink = styled.a`
-  color: #00a2ff;
-  text-decoration: none;
+// const PolicyLink = styled.a`
+//   color: #00a2ff;
+//   text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
-  }
-`;
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// `;
 function SignUp() {
   return (
     <Container>
+      <SocialSignup />
       <RegistrationWindow>
         <InputContainer>
           <InputLabel>Display name</InputLabel>
@@ -99,7 +102,7 @@ function SignUp() {
           </PasswordRule>
         </InputContainer>
         <SignupButton>Sign&nbsp;up</SignupButton>
-        <PolicyLinks>
+        {/* <PolicyLinks>
           By clicking “Sign up”, you agree to our&nbsp;
           <PolicyLink
             href="https://stackoverflow.com/legal/terms-of-service/public"
@@ -122,7 +125,7 @@ function SignUp() {
             cookie policy
           </PolicyLink>
           .
-        </PolicyLinks>
+        </PolicyLinks> */}
       </RegistrationWindow>
     </Container>
   );

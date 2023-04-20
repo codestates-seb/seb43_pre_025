@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import SocialLogin from './SocialLogin';
 
 const LoginPage = styled.section`
   width: 100%;
@@ -7,7 +8,7 @@ const LoginPage = styled.section`
   padding-top: 50px;
   display: flex;
   justify-content: center;
-  background-color: var(--black-050);
+  background-color: white;
 
   .login-container {
     width: 100%;
@@ -27,7 +28,7 @@ const LoginPage = styled.section`
       text-align: center;
       > a {
         margin-left: 5px;
-        color: var(--blue-600);
+        color: blue;
       }
     }
   }
@@ -35,7 +36,7 @@ const LoginPage = styled.section`
 
 const LoginBox = styled.div`
     width: 100%;
-    max-width: 280px;
+    max-width: 300px;
     padding: 24px;
     margin-bottom: 24px;
     background: #ffffff;
@@ -107,6 +108,7 @@ const Login = () => {
     return(
       <LoginPage>
         <div className="login-container">
+          <SocialLogin />
         <LoginBox className="LoginBox">
       <div className="login-email">
         <label htmlFor="email">Email</label>
