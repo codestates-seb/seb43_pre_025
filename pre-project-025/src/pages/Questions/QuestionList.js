@@ -1,6 +1,7 @@
-import styled from 'styled-components';
-import { AskBtn } from '../../components/Buttons';
-import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import { AskBtn } from "../../components/Buttons";
+import { useNavigate } from "react-router-dom";
+import Questions from "./Questions";
 
 const QuestionListPage = styled.div`
   width: calc(100% - 164px - 324px);
@@ -25,20 +26,18 @@ const QuestionHeader = styled.header`
   }
 `;
 
-
 const QuestionList = () => {
-
   const navigate = useNavigate();
 
   const askHandle = () => {
-    navigate('/ask');
+    navigate("/ask");
   };
 
-    return (
-        <QuestionListPage>
-          <QuestionHeader>
-             <h1>All Questions</h1>
-             <AskBtn
+  return (
+    <QuestionListPage>
+      <QuestionHeader>
+        <h1>All Questions</h1>
+        <AskBtn
           onClick={() => {
             askHandle();
           }}
@@ -46,9 +45,15 @@ const QuestionList = () => {
           Ask Question
         </AskBtn>
       </QuestionHeader>
-        </QuestionListPage>
-    )
-}
-
+      <Questions
+      // key={question.questionId}
+      // questions={question}
+      // userName={question.author}
+      // index={index}
+      />
+      <Questions />
+    </QuestionListPage>
+  );
+};
 
 export default QuestionList;
