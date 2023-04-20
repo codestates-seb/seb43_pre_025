@@ -1,20 +1,29 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Nav from "./components/Nav";
-import Questions from "./components/Questions";
-import { createGlobalStyle } from "styled-components";
+import Main from "./components/Main";
+import GlobalStyle from "./assets/style/GlobalStyle";
+import QuestionList from "./components/QuestionList";
 
-const GlobalStyles = createGlobalStyle`
-  body{
-    width: 100%;
-    background-color: white;
-  }`;
+// import Questions from "./components/Questions";
+// import QuestionList from "./components/QuestionList";
+// import { createGlobalStyle } from """;
+
+// const GlobalStyles = createGlobalStyle`
+//   body{
+//     width: 100%;
+//     background-color: white;
+//   }`;
 function App() {
   return (
     <div>
-      <GlobalStyles />
+      <GlobalStyle />
       <Header />
-      <Nav />
-      <Questions />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Main />}></Route>
+          {/* <Route index element={<QuestionList />}></Route> */}
+        </Routes>
+      </Router>
     </div>
   );
 }
