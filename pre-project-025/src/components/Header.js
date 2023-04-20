@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import mainLogo from '../assets/logo.png';
 import Search from './Search';
+import { useNavigate } from 'react-router-dom';
+
 
 const StyledHeader = styled.header`
     width: 100%;
@@ -13,15 +15,13 @@ const StyledHeader = styled.header`
     justify-content: center;
     align-items: center;
 
-
-  .header-container {
+    .header-container {
     width: 1264px;
     max-width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 
       .gnb {
       display: flex;
@@ -34,7 +34,6 @@ const StyledHeader = styled.header`
       li {
         padding: 6px 12px;
         margin: 2px;
-
         list-style:none;
       }
     }
@@ -87,6 +86,16 @@ const LogoImg = styled.img`
 `
 
 function Header() {
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        navigate('./login');
+    };
+
+    const hadleSignup = () => {
+        navigate('./signup');
+    };
+
     return (
         <StyledHeader>
             <div className='header-container'>
@@ -98,9 +107,10 @@ function Header() {
                 </ul>
                 <Search/>
                 <div className="button-container">
-                    <LoginButton>Log in</LoginButton>
-                    <SignButton>Sign up</SignButton>
+                    <LoginButton onClick={handleLogin}>Log in</LoginButton>
+                    <SignButton onClick={hadleSignup}>Sign up</SignButton>
                 </div>
+               
             </div>
         </StyledHeader>
     )
