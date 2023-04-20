@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import mainLogo from '../assets/logo.png';
 import Search from './Search';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const StyledHeader = styled.header`
@@ -99,7 +99,9 @@ function Header() {
     return (
         <StyledHeader>
             <div className='header-container'>
+            <Link to = "/">
             <LogoImg src={mainLogo} alt="logo" />
+            </Link>
                 <ul className="gnb">
                     <li>About</li>
                     <li>Products</li>
