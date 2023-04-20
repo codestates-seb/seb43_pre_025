@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import mainLogo from '../assets/images/logo.png';
 import Search from './Search';
 import { Link, useNavigate } from 'react-router-dom';
+// import Profile from '../pages/Profile';
+// import { useSelector } from 'react-redux';
+import LoginHeader from '../pages/LoginHeader';
 
 
 const StyledHeader = styled.header`
@@ -23,7 +26,7 @@ const StyledHeader = styled.header`
     justify-content: space-between;
     align-items: center;
 
-      .gnb {
+      .menu {
       display: flex;
       align-items: center;
       padding: 2px;
@@ -102,7 +105,7 @@ function Header() {
             <Link to = "/">
             <LogoImg src={mainLogo} alt="logo" />
             </Link>
-                <ul className="gnb">
+                <ul className="menu">
                     <li>About</li>
                     <li>Products</li>
                     <li>For Teams</li>
@@ -112,7 +115,7 @@ function Header() {
                     <LoginButton onClick={handleLogin}>Log in</LoginButton>
                     <SignButton onClick={hadleSignup}>Sign up</SignButton>
                 </div>
-               
+                <LoginHeader />
             </div>
         </StyledHeader>
     )
