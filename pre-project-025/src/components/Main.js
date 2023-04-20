@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
-import Nav from './Nav';
-import Questions from './Questions';
-import QuestionList from './QuestionList';
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+import Nav from "./Nav";
+import Questions from "./Questions";
+import QuestionList from "./QuestionList";
 
 const CommonLayout = styled.main`
   width: 100%;
@@ -77,7 +77,7 @@ const Main = () => {
         </LeftAside>
 
         <Outlet />
-        
+
         <RightAside>
           <ul>
             <li className="widget-header">The Overflow Blog</li>
