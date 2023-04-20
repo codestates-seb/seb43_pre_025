@@ -27,7 +27,16 @@ public interface AnswerMapper {
         return answer;
     }
 
-    Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPostDto);
+    default Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto) {
+        Answer answer = new Answer();
+        Question question = new Question();
+
+        question.setId(answerPatchDto.getQuestionId());
+        answer.setAnswerId(answerPatchDto.getAnswerId());
+        answer.setQuestion(question);
+        answer.setContent(answerPatchDto.getContent());
+        return answer;
+    }
 
     List<AnswerDto.Response> answersToAnswerDtoResponses(List<Answer> answers);
 
