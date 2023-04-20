@@ -24,6 +24,7 @@ function App() {
         <Route path="/" element={<Main />}></Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        {/* <Route index element={<QuestionList />}></Route> */}
       </Routes>
     </div>
   );
