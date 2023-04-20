@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { AskBtn } from '../../components/Buttons';
+import { useNavigate } from 'react-router-dom';
 
 const QuestionListPage = styled.div`
   width: calc(100% - 164px - 324px);
@@ -26,11 +27,22 @@ const QuestionHeader = styled.header`
 
 
 const QuestionList = () => {
+
+  const navigate = useNavigate();
+
+  const askHandle = () => {
+    navigate('/ask');
+  };
+
     return (
         <QuestionListPage>
           <QuestionHeader>
              <h1>All Questions</h1>
-             <AskBtn>
+             <AskBtn
+          onClick={() => {
+            askHandle();
+          }}
+        >
           Ask Question
         </AskBtn>
       </QuestionHeader>
