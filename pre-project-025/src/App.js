@@ -12,12 +12,15 @@ function App() {
     <div>
       <GlobalStyle />
       <Header />
+      {/* outlet router용 */}
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<QuestionList />}></Route>
         </Route>
       </Routes>
+      {/* common router용 */}
       <Routes>
+        <Route path="/ask" element={<AskQuestion />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
