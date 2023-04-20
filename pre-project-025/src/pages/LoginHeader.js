@@ -15,16 +15,16 @@ const Profile = styled.div`
         padding: 10px;
         width: 50px;
         height: 50px;
-        color: hsl(207, 100%, 59%);
+        color: hsl(32, 100%, 60%);
     }
 `
 
 const LogoutButton = styled.button`
     display: flex;
     align-items: center;
-    background-color: hsl(207, 100%, 66%);
+    background-color: hsl(32, 100%, 60%);
     border-radius: 3px;
-    border: 1px solid hsl(207, 100%, 64%);
+    border: 1px solid hsl(32, 100%, 56%);
 
     li {
     font-size: 15px;
