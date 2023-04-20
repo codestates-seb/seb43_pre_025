@@ -76,8 +76,8 @@ const Main = () => {
           <Nav />
         </LeftAside>
 
-        <Questions />
-
+        <Outlet />
+        
         <RightAside>
           <ul>
             <li className="widget-header">The Overflow Blog</li>
