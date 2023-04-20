@@ -30,3 +30,23 @@ export const AskBtn = styled.button`
     background-color: var(--blue-400);
   }
 `;
+
+export const SocialButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 4px 0;
+  border: 1px solid hsl(0, 0%, 79%);
+  border-radius: 5px;
+  font-size: 13px;
+  color: black;
+  outline: none;
+
+  img {
+    width: 18px; 
+    height: 18px;
+    margin-right: 5px;
+  }
+`
