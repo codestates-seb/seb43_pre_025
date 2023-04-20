@@ -15,15 +15,13 @@ const StyledHeader = styled.header`
     justify-content: center;
     align-items: center;
 
-
-  .header-container {
+    .header-container {
     width: 1264px;
     max-width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 
       .gnb {
       display: flex;
@@ -36,7 +34,6 @@ const StyledHeader = styled.header`
       li {
         padding: 6px 12px;
         margin: 2px;
-
         list-style:none;
       }
     }
