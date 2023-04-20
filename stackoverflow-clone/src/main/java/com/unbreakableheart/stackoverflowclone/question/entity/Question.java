@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Question extends BaseEntity {
     @Id
+    @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "QUESTION_ID")
     private Long id;

@@ -34,7 +34,6 @@ public class AnswerController {
 
         answerPatchDto.setAnswerId(answerId);
         Answer answer = answerService.updateAnswer(answerMapper.answerPatchDtoToAnswer(answerPatchDto));
-        AnswerDto.Response response = answerMapper.answerToAnswerDtoResponse(answer);
         return ResponseEntity.ok().build();
     }
 

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 
 public class AnswerDto {
     @Getter
+    @Setter
     @AllArgsConstructor
     public static class Post {
         private Long questionId;
@@ -33,7 +34,7 @@ public class AnswerDto {
     @Getter
     @AllArgsConstructor
     public static class Response {
-        private Long id;
+        private Long answerId;
         private String content;
         private Long userId;
         private Long questionId;
