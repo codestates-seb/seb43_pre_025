@@ -3,8 +3,6 @@ import google from '../assets/images/google-logo.png';
 import github from '../assets/images/github-logo.png';
 import facebook from '../assets/images/facebook-logo.png';
 import { SocialButton } from '../components/Buttons';
-import GlobalStyle from '../assets/style/GlobalStyle';
-
 
 const SocialContainer = styled.div`
   display: flex;
@@ -21,7 +19,7 @@ function SocialLogin() {
         <img src={google} alt="google-logo" />
           Log in with Google
         </SocialButton>
-        <SocialButton bgColor="var(--black-750)" color="#fff">
+        <SocialButton>
         <img src={github} alt="github-logo" />
           Log in with GitHub
         </SocialButton>
