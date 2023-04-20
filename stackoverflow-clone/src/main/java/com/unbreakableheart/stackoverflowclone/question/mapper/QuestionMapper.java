@@ -24,9 +24,9 @@ public interface QuestionMapper {
         //기본 질문 등록
         Question question = Question.makeQuestion(requestBody.getTitle(), requestBody.getContent());
 
-        List<QuestionTag> questionTags = requestBody.getQuestionTags().stream().map(name -> {
-             return new QuestionTag(name.getName());
-        }).collect(Collectors.toList());
+        List<QuestionTag> questionTags = requestBody.getQuestionTags().stream().map(name ->
+              new QuestionTag(name.getName())
+        ).collect(Collectors.toList());
 
         //질문에 유저 등록
         //질문에 태그 등록]
@@ -38,11 +38,21 @@ public interface QuestionMapper {
 
     default Question questionPatchToQuestion(QuestionDto.Patch requestBody){
 
+        //외래키 엔티티 생성
         User user = new User();
         user.setId(requestBody.getUserId());
 
+        //기본 질문 등록
         Question question = Question.makeQuestion(requestBody.getTitle(), requestBody.getContent());
+
+        List<QuestionTag> questionTags = requestBody.getQuestionTags().stream().map(name ->
+                new QuestionTag(name.getName())
+        ).collect(Collectors.toList());
+
+        //질문에 유저 등록
+        //질문에 태그 등록]
         question.setUser(user);
+        question.setQuestionTags(questionTags);
 
         return question;
     };
@@ -56,9 +66,9 @@ public interface QuestionMapper {
                 question.getTitle(),
                 question.getContent(),
                 question.getUser().getId(),
-                question.getComments(),
+//                question.getComments(),
                 question.getAnswers(),
-                question.getVotes(),
+//                question.getVotes(),
                 questionTagResponse
         );
     };

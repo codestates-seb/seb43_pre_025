@@ -5,7 +5,9 @@ import com.unbreakableheart.stackoverflowclone.common.exception.ExceptionCode;
 import com.unbreakableheart.stackoverflowclone.question.entity.Question;
 import com.unbreakableheart.stackoverflowclone.question.repository.QuestionRepository;
 import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
+import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
 import com.unbreakableheart.stackoverflowclone.tag.repository.TagRepository;
+import com.unbreakableheart.stackoverflowclone.tag.service.QuestionTagService;
 import com.unbreakableheart.stackoverflowclone.tag.service.TagService;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import com.unbreakableheart.stackoverflowclone.user.service.UserService;
@@ -32,25 +34,20 @@ public class QuestionService {
 
     private final TagService tagService;
 
+    private final QuestionTagService questionTagService;
+
 
     public Question createQuestion(Question question) {
         verifyPostQuestion(question);
 
-        //Logic
         User foundUser = userService.findUser(question.getUser().getId());
         question.setUser(foundUser);
 
-
-        //Tag 로직 필요함//
-        //1. 이름을 통해서 생성하여 ID값을 반환
-        //2. 얻은 ID값을 통해서 questionTag 객체 생성
-        List<QuestionTag> newQuestionTags = getQuestionTags(question);
-        /////////////////
-
-
+        //Tag 추가 로직 //
+//        List<QuestionTag> newQuestionTags = getQuestionTags(question);
+//        question.setQuestionTags(newQuestionTags);
 
         Question savedQuestion = questionRepository.save(question);
-        savedQuestion.setQuestionTags(newQuestionTags);
 
         return savedQuestion;
     }
@@ -62,29 +59,34 @@ public class QuestionService {
         List<QuestionTag> newQuestionTags = new ArrayList<>();
         for (Long tagId : tagIds) {
             QuestionTag questionTag = new QuestionTag();
+            questionTag.setName(tagService.findTagNameById(tagId));
             questionTag.setQuestion(question);
             questionTag.setTag(tagService.findTagAlways(tagId));
+            questionTagService.saveQuestionTag(questionTag);
             newQuestionTags.add(questionTag);
         }
         return newQuestionTags;
     }
 
-
     public Question updateQuestion(Question question, Long questionId) {
-        verifyPatchQuestion(question, questionId);
-
+        verifyPatchQuestion(question.getUser().getId(), questionId);
         //    Logic
         //Question 변경 로직//
         Question foundQuestion = questionRepository.findById(questionId).get();
         foundQuestion.updateQuestion(question.getTitle(), question.getContent());
+        //기존 Tag 변경 로직//
 
-        //Tag 변경 로직 //
-        List<QuestionTag> newQuestionTags = getQuestionTags(question);
-        foundQuestion.setQuestionTags(newQuestionTags);
-        ////////////////////
-
+//        deleteQuestionTag(foundQuestion);
+//        foundQuestion.updateQuestion(question.getTitle(), question.getContent(), question.getQuestionTags());
+//        List<QuestionTag> newQuestionTags = getQuestionTags(foundQuestion);
+//        foundQuestion.setQuestionTags(newQuestionTags);
 
         return foundQuestion;
+    }
+
+    private void deleteQuestionTag(Question foundQuestion) {
+        List<QuestionTag> existingQuestionTags = foundQuestion.getQuestionTags();
+        existingQuestionTags.forEach(questionTag -> questionTagService.deleteQuestionTag(questionTag.getId()));
     }
 
     public Question findQuestion(Long questionId) {
@@ -115,6 +117,8 @@ public class QuestionService {
 
         Question question = questionRepository.findById(questionId).get();
         question.setQuestionStatus(Question.QuestionStatus.QUESTION_DELETED);
+        //QuestionTag 삭제
+        //deleteQuestionTag(question);
     }
 
 
@@ -133,13 +137,13 @@ public class QuestionService {
 
     }
 
-    private void verifyPatchQuestion(Question question, Long questionId) {
+    private void verifyPatchQuestion(Long userId, Long questionId) {
         //Exception
         //1. Member Exist
         //2. Member is the writer
         //3. Question Exist
         //4. Question Not Deleted
-        userService.findUser(question.getUser().getId());
+        userService.findUser(userId);
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question foundQuestion = optionalQuestion.orElseThrow(() -> new CustomException(ExceptionCode.QUESTION_NOT_FOUND));
         isDeleted(foundQuestion.getQuestionStatus());

@@ -1,5 +1,6 @@
 package com.unbreakableheart.stackoverflowclone.question.dto;
 
+import com.unbreakableheart.stackoverflowclone.answer.entity.Answer;
 import com.unbreakableheart.stackoverflowclone.tag.dto.QuestionTagDto;
 import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
 import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
@@ -24,7 +25,7 @@ public class QuestionDto {
 
         private String content;
 
-        private List<QuestionTagDto.Post> questionTags;
+//        private List<QuestionTagDto.Post> questionTags;
 
     }
     @Getter
@@ -39,7 +40,7 @@ public class QuestionDto {
 
         private String content;
 
-        private List<QuestionTagDto.Patch> questionTags;
+//        private List<QuestionTagDto.Patch> questionTags;
 
         public void setQuestionId(Long questionId) {
             this.questionId = questionId;
@@ -58,11 +59,11 @@ public class QuestionDto {
 
         private Long userId;
 
-        private List<Comment> comments;
-
+//        private List<Comment> comments;
+//
         private List<Answer> answers;
-
-        private List<Vote> votes;
+//
+//        private List<Vote> votes;
 
         private List<QuestionTagDto.Response> questionTags;
     }

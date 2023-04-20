@@ -17,7 +17,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/questions/{question-id}")
+@RequestMapping("/answers")
 public class AnswerController {
 
     private final AnswerService answerService;
@@ -55,7 +55,7 @@ public class AnswerController {
     }
 
 
-    @GetMapping
+    @GetMapping("/answer")
     public ResponseEntity getAnswers(@RequestParam @Positive int page,
                                      @RequestParam @Positive int size) {
         Page<Answer> answerPage = answerService.findAnswers(page - 1, size);

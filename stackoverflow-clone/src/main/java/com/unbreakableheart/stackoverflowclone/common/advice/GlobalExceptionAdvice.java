@@ -17,8 +17,8 @@ public class GlobalExceptionAdvice {
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getExceptionCode().getCode()));
     }
 
-    @ExceptionHandler
-    public ErrorResponse handleException(Exception e){
-        return ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler
+//    public ErrorResponse handleException(Exception e){
+//        return ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }

@@ -33,12 +33,17 @@ public class TagService {
             return tagRepository.save(new Tag(tagName)).getId();
         }
     }
+
+    @Transactional(readOnly = true)
+    public String findTagNameById(Long id) {
+        return tagRepository.findById(id).get().getName();
+    }
     private boolean tagExist(String name) {
         Optional<Tag> optionalTag = tagRepository.findByName(name);
-        if (optionalTag.isEmpty()) {
-            return false;
+        if (optionalTag.isPresent()) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     public Tag findTagAlways(Long tagId) {

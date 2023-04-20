@@ -32,9 +32,10 @@ public class QuestionController {
     private final QuestionMapper mapper;
 
 
+    @PostMapping
     public ResponseEntity postQuestion(@Valid @RequestBody QuestionDto.Post requestBody) {
-
-        Question question = questionService.createQuestion(mapper.questionPostToQuestion(requestBody));
+        Question mapperQuestion = mapper.questionPostToQuestion(requestBody);
+        Question question = questionService.createQuestion(mapperQuestion);
         URI location = UriCreator.createURI(question.getId());
 
         return ResponseEntity.created(location).build();
@@ -48,7 +49,7 @@ public class QuestionController {
         requestBody.setQuestionId(questionId);
         Question question = questionService.updateQuestion(mapper.questionPatchToQuestion(requestBody),questionId);
 
-        return new ResponseEntity<>(new SingleResponse<>(mapper.questionToQuestionResponse(question)), HttpStatus.OK);
+        return ResponseEntity.ok(new SingleResponse<>(mapper.questionToQuestionResponse(question)));
     }
 
     @GetMapping("/{question-id}/title")
@@ -57,7 +58,7 @@ public class QuestionController {
     ) {
         Question question = questionService.findQuestion(questionId);
 
-        return new ResponseEntity<>(new SingleResponse<>(mapper.questionToQuestionResponse(question)), HttpStatus.OK);
+        return ResponseEntity.ok(new SingleResponse<>(mapper.questionToQuestionResponse(question)));
     }
 
     @GetMapping
@@ -67,7 +68,7 @@ public class QuestionController {
         Page<Question> questionPage = questionService.findQuestions(page - 1, size);
         List<Question> questions = questionPage.getContent();
 
-        return new ResponseEntity(new MultiResponse<>(questionPage, mapper.questionsToQuestionDtoResponses(questions)), HttpStatus.OK);
+        return ResponseEntity.ok(new MultiResponse<>(questionPage, mapper.questionsToQuestionDtoResponses(questions)));
     }
 
     @DeleteMapping("{question-id}")
@@ -76,7 +77,7 @@ public class QuestionController {
     ) {
         questionService.deleteQuestion(questionId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
 }

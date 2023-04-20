@@ -3,6 +3,7 @@ package com.unbreakableheart.stackoverflowclone.tag.entity;
 import com.unbreakableheart.stackoverflowclone.question.entity.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -16,9 +17,10 @@ public class QuestionTag {
     @Column(name = "QUESTION_TAG_ID")
     private Long id;
 
+    @Setter
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 

@@ -36,7 +36,7 @@ public class Question extends BaseEntity {
 //    외래키
 
     @Setter
-    @OneToMany(mappedBy = "question",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "question")
     private List<QuestionTag> questionTags = new ArrayList<>();
     @JoinColumn(name = "USER_ID")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -99,6 +99,11 @@ public class Question extends BaseEntity {
     public void updateQuestion(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+    public void updateQuestion(String title, String content, List<QuestionTag> questionTags) {
+        this.title = title;
+        this.content = content;
+        this.questionTags = questionTags;
     }
 
     public void viewIncrease() {
