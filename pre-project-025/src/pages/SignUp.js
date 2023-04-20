@@ -66,20 +66,22 @@ const SignupButton = styled.button`
   border: 1px solid hsl(206, 100%, 52%);
 `;
 
-// const PolicyLinks = styled.div`
-//     font-size: small;
-//     color: black;
-//     margin: 30px 3px 10px 3px;
-// `;
+const PolicyLinks = styled.div`
+    font-size: small;
+    color: black;
+    margin: 30px 3px 10px 3px;
+    text-align: center;
+`;
 
-// const PolicyLink = styled.a`
-//   color: #00a2ff;
-//   text-decoration: none;
+const PolicyLink = styled.a`
+  color: #00a2ff;
+  text-decoration: none;
 
-//   &:hover {
-//     text-decoration: underline;
-//   }
-// `;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 function SignUp() {
   return (
     <Container>
@@ -102,7 +104,7 @@ function SignUp() {
           </PasswordRule>
         </InputContainer>
         <SignupButton>Sign&nbsp;up</SignupButton>
-        {/* <PolicyLinks>
+        <PolicyLinks>
           By clicking “Sign up”, you agree to our&nbsp;
           <PolicyLink
             href="https://stackoverflow.com/legal/terms-of-service/public"
@@ -125,7 +127,7 @@ function SignUp() {
             cookie policy
           </PolicyLink>
           .
-        </PolicyLinks> */}
+        </PolicyLinks>
       </RegistrationWindow>
     </Container>
   );
