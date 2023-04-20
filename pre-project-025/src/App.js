@@ -1,8 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import GlobalStyle from "./assets/style/GlobalStyle";
 import QuestionList from "./components/QuestionList";
+import Login from "./components/Login";
+import Signup from "./components/SignUp";
 
 // import Questions from "./components/Questions";
 // import QuestionList from "./components/QuestionList";
@@ -18,14 +20,12 @@ function App() {
     <div>
       <GlobalStyle />
       <Header />
-      <Router>
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          {/* <Route index element={<QuestionList />}></Route> */}
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Main />}></Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
     </div>
-
   );
 }
 
