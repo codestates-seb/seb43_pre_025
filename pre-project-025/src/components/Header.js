@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import mainLogo from '../assets/logo.png';
+import mainLogo from '../assets/images/logo.png';
 import Search from './Search';
 import { Link, useNavigate } from 'react-router-dom';
 

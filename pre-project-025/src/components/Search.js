@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SearchIcon from '../assets/search.png';
+import SearchIcon from '../assets/images/search.png';
 
 const SearchContainer = styled.form`
   position: relative;

@@ -1,21 +1,21 @@
 import styled from "styled-components";
+import SocialSignup from "./SocialSignup";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
-  background-color: hsl(210, 8%, 95%);
+  background-color: white;
 `;
 
 const RegistrationWindow = styled.div`
   width: 300px;
-  height: 430px;
+  padding: 24px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   align-items: center;
   padding-top: 30px;
 `;
@@ -26,20 +26,20 @@ const InputContainer = styled.div`
 `;
 
 const InputLabel = styled.label`
-  margin-bottom: 5px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
+  padding: 2px;
 `;
 
 const PasswordRule = styled.p`
-  width: 240px;
-  font-size: 12px;
-  color: hsl(210, 8%, 45%);
-  margin-bottom: 3px;
+    font-size: 13px;
+    font-weight: 400;
+    color: black;
+    margin: 0px 0px 20px 3px;
 `;
 
 const InputField = styled.input`
-  width: 100%;
+    width: 100%;
     margin-top: 5px;
     padding: 8px 9px;
     background-color: #FFFFFF;
@@ -52,31 +52,25 @@ const InputField = styled.input`
         box-shadow: 0px 0px 0px 1px hsl(210, 8%, 5%);
         border-color: hsl(210, 100%, 67%)
     }
-    &:nth-last-child(2) {
-    margin-bottom: 1px;
-  }
 `;
 
 const SignupButton = styled.button`
-  width: 270px;
-  height: 40px;
-  margin-top: 20px;
   background-color: hsl(206, 100%, 52%);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #007acc;
-  }
+  width: 100%;
+  padding: 10px;
+  border: transparent;
+  box-shadow: inset 0 1px 0 0 hsl(0, 0%, 100%);
+  border-radius: 3px;
+  color: white;
+  font-size: 13px;
+  border: 1px solid hsl(206, 100%, 52%);
 `;
 
 const PolicyLinks = styled.div`
-  margin-top: 10px;
-  font-size: 12px;
-  width: 270px;
+    font-size: small;
+    color: black;
+    margin: 30px 3px 10px 3px;
+    text-align: center;
 `;
 
 const PolicyLink = styled.a`
@@ -87,9 +81,11 @@ const PolicyLink = styled.a`
     text-decoration: underline;
   }
 `;
+
 function SignUp() {
   return (
     <Container>
+      <SocialSignup />
       <RegistrationWindow>
         <InputContainer>
           <InputLabel>Display name</InputLabel>
