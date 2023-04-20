@@ -5,7 +5,7 @@ import GlobalStyle from "./assets/style/GlobalStyle";
 import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
 // import Questions from "./components/Questions";
-import QuestionList from "./components/QuestionList";
+import QuestionList from "./pages/Questions/QuestionList";
 // import { createGlobalStyle } from """;
 
 function App() {
