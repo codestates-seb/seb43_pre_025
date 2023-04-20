@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import GlobalStyle from "./assets/style/GlobalStyle";
-import Login from './components/Login';
-import Signup from './components/SignUp';
+import Login from './pages/Login';
+import Signup from './pages/SignUp';
 // import Questions from "./components/Questions";
 import QuestionList from "./components/QuestionList";
 // import { createGlobalStyle } from """;
@@ -12,8 +12,8 @@ import QuestionList from "./components/QuestionList";
 
 function App() {
   return (
-    <div>
-      <GlobalStyle />
+  <div>
+    <GlobalStyle />
       <Header />
         <Routes>
           <Route path="/" element={<Main />}>
@@ -24,9 +24,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         </Routes>
-    </div>
-
-  );
+  </div>
+  )
 }
 
 export default App;

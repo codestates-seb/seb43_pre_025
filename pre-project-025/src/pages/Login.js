@@ -76,7 +76,7 @@ const LoginBox = styled.div`
 `;
 
 const UserInput = styled.input`
-    width: 93%;
+    width: 100%;
     margin-top: 5px;
     padding: 8px 9px;
     background-color: #FFFFFF;
