@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AskBtn } from '../components/Buttons';
+import { AskBtn } from '../../components/Buttons';
 
 const QuestionListPage = styled.div`
   width: calc(100% - 164px - 324px);

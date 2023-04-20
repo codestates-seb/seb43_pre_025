@@ -2,18 +2,18 @@ import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import GlobalStyle from "./assets/style/GlobalStyle";
-import Login from './pages/Login';
-import Signup from './pages/SignUp';
+import Login from "./pages/Login";
+import Signup from "./pages/SignUp";
 // import Questions from "./components/Questions";
-import QuestionList from "./components/QuestionList";
+import QuestionList from "./pages/Questions/QuestionList";
 // import { createGlobalStyle } from """;
 
 
 
 function App() {
   return (
-  <div>
-    <GlobalStyle />
+    <div>
+      <GlobalStyle />
       <Header />
         <Routes>
           <Route path="/" element={<Main />}>
@@ -24,8 +24,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         </Routes>
-  </div>
-  )
+    </div>
+  );
 }
 
 export default App;
