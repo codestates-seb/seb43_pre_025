@@ -20,11 +20,11 @@ function SocialSignup() {
         <img src={google} alt="google-logo" />
           Sign up with Google
         </SocialButton>
-        <SocialButton>
+        <SocialButton style={{backgroundColor: 'hsl(210, 8%, 20%)', color:"#ffffff"}}>
         <img src={github} alt="github-logo" />
           Sign up with GitHub
         </SocialButton>
-        <SocialButton>
+        <SocialButton style={{backgroundColor: '#385499', color:"#ffffff"}}>
         <img src={facebook} alt="facebook-logo" />
           Sign up with Facebook
         </SocialButton>

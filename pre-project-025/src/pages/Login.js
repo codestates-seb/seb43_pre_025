@@ -83,7 +83,7 @@ const UserInput = styled.input`
     background-color: #FFFFFF;
     color: hsl(210, 8%, 5%);
     font-size: 13px;
-    border: 1px solid hsl(210, 8%, 5%);
+    border: 1px solid hsl(210, 8%, 75%);
     border-radius: 3px;
     outline: none;
     &:focus {

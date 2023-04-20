@@ -19,11 +19,11 @@ function SocialLogin() {
         <img src={google} alt="google-logo" />
           Log in with Google
         </SocialButton>
-        <SocialButton>
+        <SocialButton style={{backgroundColor: 'hsl(210, 8%, 20%)', color:"#ffffff"}}>
         <img src={github} alt="github-logo" />
           Log in with GitHub
         </SocialButton>
-        <SocialButton>
+        <SocialButton style={{backgroundColor: '#385499', color:"#ffffff"}}>
         <img src={facebook} alt="facebook-logo" />
           Log in with Facebook
         </SocialButton>

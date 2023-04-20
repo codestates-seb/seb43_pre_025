@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SocialSignup from "./SocialSignup";
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -8,6 +9,19 @@ const Container = styled.div`
   align-items: center;
   height: 100vh;
   background-color: white;
+
+  .login-link {
+      width: 100%;
+      max-width: 288px;
+      padding: 24px 0;
+      margin-bottom: 24px;
+      font-size: 13px;
+      text-align: center;
+      > a {
+        margin-left: 5px;
+        color: blue;
+      }
+    }
 `;
 
 const RegistrationWindow = styled.div`
@@ -32,7 +46,7 @@ const InputLabel = styled.label`
 `;
 
 const PasswordRule = styled.p`
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 400;
     color: black;
     margin: 0px 0px 20px 3px;
@@ -45,7 +59,7 @@ const InputField = styled.input`
     background-color: #FFFFFF;
     color: hsl(210, 8%, 5%);
     font-size: 13px;
-    border: 1px solid hsl(210, 8%, 5%);
+    border: 1px solid hsl(210, 8%, 75%);
     border-radius: 3px;
     outline: none;
     &:focus {
@@ -67,10 +81,9 @@ const SignupButton = styled.button`
 `;
 
 const PolicyLinks = styled.div`
-    font-size: small;
+    font-size: 10px;
     color: black;
-    margin: 30px 3px 10px 3px;
-    text-align: center;
+    margin: 10px 0px 20px 3px;
 `;
 
 const PolicyLink = styled.a`
@@ -105,30 +118,33 @@ function SignUp() {
         </InputContainer>
         <SignupButton>Sign&nbsp;up</SignupButton>
         <PolicyLinks>
-          By clicking “Sign up”, you agree to our&nbsp;
+          By clicking “Sign up”, you agree to our &nbsp;
           <PolicyLink
             href="https://stackoverflow.com/legal/terms-of-service/public"
             target="_blank"
           >
-            terms of service
+          terms of service &nbsp;
           </PolicyLink>
-          ,&nbsp;
           <PolicyLink
             href="https://stackoverflow.com/legal/privacy-policy"
             target="_blank"
           >
-            privacy policy
+          privacy policy
           </PolicyLink>
-          and&nbsp;
+          &nbsp; and
           <PolicyLink
             href="https://stackoverflow.com/legal/cookie-policy"
             target="_blank"
           >
-            cookie policy
+          &nbsp; cookie policy
           </PolicyLink>
           .
         </PolicyLinks>
       </RegistrationWindow>
+      <div className="login-link">
+          {`Already have an account?`}
+          <Link to="/login">Login</Link>
+      </div>
     </Container>
   );
 }
