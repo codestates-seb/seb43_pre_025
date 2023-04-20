@@ -39,21 +39,21 @@ const PasswordRule = styled.p`
 `;
 
 const InputField = styled.input`
-  width: 240px;
-  height: 20px;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 16px;
-
-  &:nth-last-child(2) {
-    margin-bottom: 1px;
-  }
-  &:focus {
+  width: 100%;
+    margin-top: 5px;
+    padding: 8px 9px;
+    background-color: #FFFFFF;
+    color: hsl(210, 8%, 5%);
+    font-size: 13px;
+    border: 1px solid hsl(210, 8%, 5%);
+    border-radius: 3px;
     outline: none;
-    border-color: #00a2ff;
-    box-shadow: 0 0 5px #00a2ff;
+    &:focus {
+        box-shadow: 0px 0px 0px 1px hsl(210, 8%, 5%);
+        border-color: hsl(210, 100%, 67%)
+    }
+    &:nth-last-child(2) {
+    margin-bottom: 1px;
   }
 `;
 
