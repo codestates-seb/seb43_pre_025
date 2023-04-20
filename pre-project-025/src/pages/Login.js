@@ -91,7 +91,7 @@ const UserInput = styled.input`
     }
 `;
 
-const CheckButton = styled.button`
+const LoginButton = styled.button`
   background-color: hsl(206, 100%, 52%);
   margin: 4px;
   padding: 10px;
@@ -123,10 +123,10 @@ const Login = () => {
         />
       </div>
       <div>
-        <CheckButton
+        <LoginButton
         >
           Log in
-        </CheckButton>
+        </LoginButton>
       </div>
     </LoginBox>
     <div className="signup-link">

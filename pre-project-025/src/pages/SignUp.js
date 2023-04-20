@@ -11,11 +11,10 @@ const Container = styled.div`
 const RegistrationWindow = styled.div`
   width: 300px;
   height: 430px;
+  padding: 24px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
   align-items: center;
   padding-top: 30px;
 `;
@@ -26,9 +25,8 @@ const InputContainer = styled.div`
 `;
 
 const InputLabel = styled.label`
-  margin-bottom: 5px;
-  font-size: 16px;
-  font-weight: bold;
+      font-size: 15px;
+      font-weight: bold;
 `;
 
 const PasswordRule = styled.p`
@@ -39,7 +37,7 @@ const PasswordRule = styled.p`
 `;
 
 const InputField = styled.input`
-  width: 100%;
+    width: 100%;
     margin-top: 5px;
     padding: 8px 9px;
     background-color: #FFFFFF;
@@ -52,25 +50,18 @@ const InputField = styled.input`
         box-shadow: 0px 0px 0px 1px hsl(210, 8%, 5%);
         border-color: hsl(210, 100%, 67%)
     }
-    &:nth-last-child(2) {
-    margin-bottom: 1px;
-  }
 `;
 
 const SignupButton = styled.button`
-  width: 270px;
-  height: 40px;
-  margin-top: 20px;
   background-color: hsl(206, 100%, 52%);
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #007acc;
-  }
+  width: 100%;
+  padding: 10px;
+  border: transparent;
+  box-shadow: inset 0 1px 0 0 hsl(0, 0%, 100%);
+  border-radius: 3px;
+  color: white;
+  font-size: 13px;
+  border: 1px solid hsl(206, 100%, 52%);
 `;
 
 const PolicyLinks = styled.div`
