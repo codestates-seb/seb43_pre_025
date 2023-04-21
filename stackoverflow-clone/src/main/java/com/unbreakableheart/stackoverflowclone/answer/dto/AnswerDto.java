@@ -39,7 +39,7 @@ public class AnswerDto {
     @AllArgsConstructor
     public static class Response {
 
-        private Long id;
+        private Long answerId;
         private Long userId;
         private Long questionId;
         private String content;
