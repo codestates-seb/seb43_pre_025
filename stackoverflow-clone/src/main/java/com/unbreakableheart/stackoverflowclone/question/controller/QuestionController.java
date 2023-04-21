@@ -29,7 +29,7 @@ import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.ANSW
 import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.QUESTION_DEFAULT_URL;
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping("/api/questions")
 @Validated
 @Slf4j
 @CrossOrigin

@@ -24,7 +24,7 @@ import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.USER
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
-@RequestMapping("/")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserMapper userMapper;
