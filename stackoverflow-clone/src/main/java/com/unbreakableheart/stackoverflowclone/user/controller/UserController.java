@@ -23,7 +23,8 @@ import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.USER
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/")
+@CrossOrigin
+@RequestMapping("/api")
 public class UserController {
 
     private final UserMapper userMapper;
@@ -41,7 +42,7 @@ public class UserController {
         return ResponseEntity.ok(loginService.login(loginDto));
     }
 
-    @PatchMapping("/{user-id}")
+    @PatchMapping("user/{user-id}")
     public ResponseEntity<SingleResponse<UserDto.Response>> patchUser(@PathVariable("user-id") @Valid @Positive Long id,
                                                                       @RequestBody UserDto.Patch patch) {
         patch.addId(id);
@@ -49,7 +50,7 @@ public class UserController {
         return ResponseEntity.ok(new SingleResponse<>(userMapper.userToUserDtoResponse(user)));
     }
 
-    @GetMapping("/{user-id}")
+    @GetMapping("user/{user-id}")
     public ResponseEntity<SingleResponse<UserDto.Response>> getUser(@PathVariable("user-id") @Valid @Positive Long id) {
         User user = userService.findUserById(id);
         return ResponseEntity.ok(new SingleResponse<>(userMapper.userToUserDtoResponse(user)));
@@ -63,7 +64,7 @@ public class UserController {
         return ResponseEntity.ok(new MultiResponse<>(userPage, userMapper.usersToUserDtoResponses(users)));
     }
 
-    @DeleteMapping("/{user-id}")
+    @DeleteMapping("user/{user-id}")
     public ResponseEntity<Object> deleteUser(@PathVariable("user-id") @Valid @Positive Long id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();

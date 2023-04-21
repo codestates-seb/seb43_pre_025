@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CommonButton } from "./Buttons";
 import { RecommendBody, RecommendTitle } from "./Recommends";
+import TextEditor from './TextEditor';
 import { Input } from "./InputStyles";
 
 const QCFormCommon = styled.div`
@@ -92,7 +93,7 @@ const AskQuestionForm = ({
               </label>
             </div>
             <div className="qc-form-body" id="qc-body">
-              {/* <TextEditor onChangeHandler={askBodySet} /> */}
+              <TextEditor onChangeHandler={askBodySet} />
             </div>
           </div>
           <RecommendBody />
