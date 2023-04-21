@@ -91,7 +91,7 @@ public class QuestionController {
     }
 
     @PostMapping("/{question-id}/answers")
-    public ResponseEntity postAnswer(@AuthenticationPrincipal UserDetailsImpl userDetails,
+    public ResponseEntity<Object> postAnswer(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                      @PathVariable("question-id") long questionId,
                                      @RequestBody AnswerDto.Post answerPostDto) {
         User user = userDetails.getUser();
