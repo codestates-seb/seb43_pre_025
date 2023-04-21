@@ -19,6 +19,7 @@ import java.util.List;
 public class Question extends BaseEntity {
 
     @Id
+    @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "QUESTION_ID")
     private Long id;

@@ -1,18 +1,31 @@
+import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
-import Questions from "./components/Questions";
-import { createGlobalStyle } from "styled-components";
+import Main from "./components/Main";
+import GlobalStyle from "./assets/style/GlobalStyle";
+import Login from "./pages/Login";
+import Signup from "./pages/SignUp";
+import QuestionList from "./pages/Questions/QuestionList";
+import AskQuestion from './pages/Questions/AskQuestion';
 
-const GlobalStyles = createGlobalStyle`
-  body{
-    width: 100%;
-    background-color: white;
-  }`;
+
+
 function App() {
   return (
     <div>
-      <GlobalStyles />
+      <GlobalStyle />
       <Header />
-      <Questions />
+      {/* outlet router용 */}
+        <Routes>
+          <Route path="/" element={<Main />}>
+          <Route index element={<QuestionList />}></Route>
+          </Route>
+        </Routes>
+        {/* common router용 */}
+        <Routes>
+        <Route path="/ask" element={<AskQuestion />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        </Routes>
     </div>
   );
 }

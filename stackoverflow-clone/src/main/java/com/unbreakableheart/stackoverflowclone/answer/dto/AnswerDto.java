@@ -8,6 +8,7 @@ import lombok.Setter;
 public class AnswerDto {
 
     @Getter
+    @Setter
     @AllArgsConstructor
     public static class Post {
 

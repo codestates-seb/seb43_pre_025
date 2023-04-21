@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 
 @Service
 public class AnswerService {
@@ -42,7 +44,7 @@ public class AnswerService {
         userService.findUserByEmail(user.getEmail());
         return answerRepository.save(answer);
     }
-
+    
     public Answer findAnswer(long answerId, User user) {
         userService.findUserByEmail(user.getEmail());
         return answerRepository.findById(answerId).orElseThrow(() ->
