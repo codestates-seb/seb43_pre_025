@@ -18,7 +18,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/answers")
+@RequestMapping("/api/answers")
 public class AnswerController {
 
     private final AnswerService answerService;
