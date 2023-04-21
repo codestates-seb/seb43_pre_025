@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "member")
 @Getter
@@ -27,4 +29,10 @@ public class User extends BaseEntity {
     @NotBlank
     @Column(nullable = false)
     private String username;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
+    public void addRoles(List<String> roles) {
+        this.roles = roles;
+    }
 }
