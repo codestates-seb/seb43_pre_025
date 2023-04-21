@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import SocialSignup from "./SocialSignup";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -95,7 +97,7 @@ const PolicyLink = styled.a`
   }
 `;
 
-function SignUp() {
+const SignUp= () => {
   return (
     <Container>
       <SocialSignup />

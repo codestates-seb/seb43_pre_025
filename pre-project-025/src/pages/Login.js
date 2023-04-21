@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const LoginPage = styled.section`
   width: 100%;
@@ -18,7 +20,7 @@ const LoginPage = styled.section`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    
     .signup-link {
       width: 100%;
       max-width: 288px;
@@ -37,6 +39,7 @@ const LoginPage = styled.section`
 const LoginBox = styled.div`
     width: 100%;
     max-width: 300px;
+    overflow:hidden;
     padding: 24px;
     margin-bottom: 24px;
     background: #ffffff;
@@ -104,38 +107,70 @@ const LoginButton = styled.button`
   border: 1px solid hsl(206, 100%, 52%);
 `;
 
-const Login = () => {
+const Login = ({ setUserInfo, setIsLogin }) => {
+  
+  const [loginInfo, setLoginInfo] = useState({
+    email: '',
+    password: '',
+  });
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleInputValue = (key) => (e) => {
+    setLoginInfo({ ...loginInfo, [key]: e.target.value });
+  };
+  const loginRequestHandler = () => {
+    const { email, password } = loginInfo;
+    if (!email || !password) {
+      setErrorMessage('아이디와 비밀번호를 입력하세요');
+      return;
+    } else {
+      setErrorMessage('');
+    }
+    return axios
+      .post('https://165d-110-14-12-165.ngrok-free.app/api/login', { loginInfo })
+      .then((res) => {
+        setIsLogin(true);
+        setUserInfo(res.data);
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setErrorMessage('로그인에 실패했습니다.');
+        }
+      });
+  };
+
+
     return(
       <LoginPage>
         <div className="login-container">
           <SocialLogin />
-        <LoginBox className="LoginBox">
-      <div className="login-email">
-        <label htmlFor="email">Email</label>
-        <UserInput
-          id="email"
-          type="email"
-        />
-      </div>
-      <div className="login-password">
-        <label htmlFor="email">Password</label>
-        <UserInput
-          id="password"
-          type="password"
-        />
-      </div>
-      <div>
-        <LoginButton
-        >
-          Log in
-        </LoginButton>
-      </div>
-    </LoginBox>
-    <div className="signup-link">
+          <LoginBox className="LoginBox">
+          <form onSubmit={(e) => e.preventDefault()}>
+              <div className="login-email">
+                <label htmlFor="email">Email</label>
+                <UserInput id="email" type="email" onChange={handleInputValue('email')}/>
+              </div>
+              <div className="login-password">
+                <label htmlFor="email">Password</label>
+                <UserInput id="password" type="password" onChange={handleInputValue('password')}/>
+              </div>
+              <div>
+                <LoginButton onClick={loginRequestHandler} >Log in</LoginButton>
+                </div>
+                {errorMessage ? (
+                <div id='alert-message' data-testid='alert-message'>{errorMessage}
+              </div>
+              ) : (
+                ''
+                )}
+                </form>
+          </LoginBox>
+
+          <div className="signup-link">
           {`Don't have an account?`}
           <Link to="/signup">Sign up</Link>
-    </div>
-    </div>
+          </div>
+        </div>
     </LoginPage>
   );
 };
