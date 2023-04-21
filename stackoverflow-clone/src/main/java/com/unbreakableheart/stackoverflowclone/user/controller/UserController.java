@@ -19,6 +19,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.USER_DEFAULT_URL;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/")
@@ -31,7 +33,7 @@ public class UserController {
     @PostMapping(value = "/signup")
     public ResponseEntity<UserDto.Post> signUp(@RequestBody UserDto.Post post) {
         User user = userService.createUser(userMapper.postToUser(post));
-        return ResponseEntity.created(UriCreator.createURI(user.getId())).build();
+        return ResponseEntity.created(UriCreator.createURI(USER_DEFAULT_URL, user.getId())).build();
     }
 
     @PostMapping(value = "/login")
@@ -41,7 +43,7 @@ public class UserController {
 
     @PatchMapping("/{user-id}")
     public ResponseEntity<SingleResponse<UserDto.Response>> patchUser(@PathVariable("user-id") @Valid @Positive Long id,
-                                    @RequestBody UserDto.Patch patch) {
+                                                                      @RequestBody UserDto.Patch patch) {
         patch.addId(id);
         User user = userService.updateUser(userMapper.patchToUser(patch));
         return ResponseEntity.ok(new SingleResponse<>(userMapper.userToUserDtoResponse(user)));
@@ -54,7 +56,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<MultiResponse<UserDto.Response>> getUsers(@RequestParam @Valid @Positive int page, @RequestParam @Valid @Positive int size) {
+    public ResponseEntity<MultiResponse<UserDto.Response>> getUsers(@RequestParam @Valid @Positive int page,
+                                                                    @RequestParam @Valid @Positive int size) {
         Page<User> userPage = userService.findUsers(page - 1, size);
         List<User> users = userPage.getContent();
         return ResponseEntity.ok(new MultiResponse<>(userPage, userMapper.usersToUserDtoResponses(users)));
