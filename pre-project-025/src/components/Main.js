@@ -1,6 +1,6 @@
-import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
-import Nav from './Nav';
+import { Outlet } from "react-router-dom";
+import styled from "styled-components";
+import Nav from "./Nav";
 
 const CommonLayout = styled.main`
   width: 100%;

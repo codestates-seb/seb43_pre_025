@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import questionCreateBg from '../../assets/images/questionCreateBg.svg';
-import AskQuestionForm from '../../components/AskQuestionForm';
+import styled from "styled-components";
+import questionCreateBg from "../../assets/images/questionCreateBg.svg";
+import AskQuestionForm from "../../components/AskQuestionForm";
 
 const QuestionCreatePage = styled.section`
   width: 100%;
@@ -80,12 +80,10 @@ const QuestionCreatePage = styled.section`
   }
 `;
 
-
 const AskQuestion = () => {
-    
-    return ( 
-        <>
-        <QuestionCreatePage>
+  return (
+    <>
+      <QuestionCreatePage>
         <div className="question-create-container">
           <div className="question-create-description">
             <div className="question-create-title">
@@ -119,16 +117,16 @@ const AskQuestion = () => {
             </div>
           </div>
           <AskQuestionForm
-            // askTitle={askTitle}
-            // askTitleSet={askTitleSet}
-            // askBody={askBody}
-            // askBodySet={askBodySet}
-            // handleSubmit={handleSubmit}
+          // askTitle={askTitle}
+          // askTitleSet={askTitleSet}
+          // askBody={askBody}
+          // askBodySet={askBodySet}
+          // handleSubmit={handleSubmit}
           />
         </div>
-        </QuestionCreatePage>
-        </>
-     );
+      </QuestionCreatePage>
+    </>
+  );
 };
 
 export default AskQuestion;

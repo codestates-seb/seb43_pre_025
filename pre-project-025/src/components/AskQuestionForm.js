@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { CommonButton } from './Buttons';
-import { RecommendBody, RecommendTitle } from './Recommends';
-import { Input } from './InputStyles';
+import styled from "styled-components";
+import { CommonButton } from "./Buttons";
+import { RecommendBody, RecommendTitle } from "./Recommends";
+import { Input } from "./InputStyles";
 
 const QCFormCommon = styled.div`
   .qc-form {
@@ -49,15 +49,15 @@ const QCFormCommon = styled.div`
 `;
 
 const AskQuestionForm = ({
-    askTitle,
-    askTitleSet,
-    askBody,
-    askBodySet,
-    handleSubmit,
-  }) => {
-    return (
-      <>
-            <QCFormCommon>
+  askTitle,
+  askTitleSet,
+  askBody,
+  askBodySet,
+  handleSubmit,
+}) => {
+  return (
+    <>
+      <QCFormCommon>
         <div className="qc-form">
           <div>
             <div className="qc-form-title">
@@ -108,9 +108,8 @@ const AskQuestionForm = ({
           Post your question
         </CommonButton>
       </div>
-      </>
+    </>
   );
 };
 
 export default AskQuestionForm;
-

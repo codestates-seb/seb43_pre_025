@@ -4,7 +4,6 @@ import com.unbreakableheart.stackoverflowclone.common.entity.BaseEntity;
 import com.unbreakableheart.stackoverflowclone.question.entity.Question;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -18,37 +17,34 @@ public class Answer extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
-
     @NotBlank
     @Column(name = "TEXT", nullable = false)
     private String content;
-
     @Column(name = "IS_ACCEPTED", nullable = false)
     private Boolean isAccepted = false;
-
     // FK
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
-
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     private User user;
 
-    public void addQuestion(Question question){
-        if(this.question == null){
+    public void addQuestion(Question question) {
+        if (this.question != question) {
             this.question = question;
             question.addAnswer(this);
         }
     }
 
-    public void addUser(User user){
-        if(this.user == null){
+    public void addUser(User user) {
+        if (this.user != user) {
             this.user = user;
         }
     }
 
-    public Answer() {}
+    public Answer() {
+    }
 
     public Answer(String content, User user, Question question) {
         this.content = content;
