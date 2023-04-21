@@ -26,6 +26,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.Objects;
 
+import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.ANSWER_DEFAULT_URL;
+import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.QUESTION_DEFAULT_URL;
+
 @RestController
 @RequestMapping("/questions")
 @Validated
@@ -33,7 +36,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class QuestionController {
 
-    private final static String ORDER_DEFAULT_URL = "/questions";
     private final QuestionService questionService;
     private final QuestionMapper mapper;
     private final AnswerService answerService;
@@ -41,18 +43,18 @@ public class QuestionController {
 
     @PostMapping
     public ResponseEntity<Object> postQuestion(@AuthenticationPrincipal User user,
-                                                @Valid @RequestBody QuestionDto.Post requestBody) {
+                                               @Valid @RequestBody QuestionDto.Post requestBody) {
 
         Question question = questionService.createQuestion(mapper.questionPostToQuestion(requestBody), user);
-        URI location = UriCreator.createURI(question.getId());
+        URI location = UriCreator.createURI(QUESTION_DEFAULT_URL, question.getId());
 
         return ResponseEntity.created(location).build();
     }
 
     @PatchMapping("/{question-id}")
     public ResponseEntity<SingleResponse<QuestionDto.Response>> patchQuestion(@AuthenticationPrincipal User user,
-                                        @PathVariable("question-id") @Positive Long questionId,
-                                        @Valid @RequestBody QuestionDto.Patch requestBody) {
+                                                                              @PathVariable("question-id") @Positive Long questionId,
+                                                                              @Valid @RequestBody QuestionDto.Patch requestBody) {
         requestBody.addQuestionId(questionId);
         Question question = questionService.updateQuestion(mapper.questionPatchToQuestion(requestBody), user);
 
@@ -61,7 +63,7 @@ public class QuestionController {
 
     @GetMapping("/{question-id}")
     public ResponseEntity<SingleResponse<QuestionDto.SingleResponse>> getQuestion(@AuthenticationPrincipal User user,
-                                      @PathVariable("question-id") @Positive Long questionId) {
+                                                                                  @PathVariable("question-id") @Positive Long questionId) {
         Question question = questionService.findQuestion(questionId, user);
 
         return ResponseEntity.ok(new SingleResponse<>(mapper.questionToQuestionResponse(question)));
@@ -69,8 +71,8 @@ public class QuestionController {
 
     @GetMapping
     public ResponseEntity<MultiResponse<QuestionDto.Response>> getQuestions(@AuthenticationPrincipal User user,
-                                       @RequestParam @Valid @Positive int page,
-                                       @RequestParam @Valid @Positive int size) {
+                                                                            @RequestParam @Valid @Positive int page,
+                                                                            @RequestParam @Valid @Positive int size) {
         Page<Question> questionPage = questionService.findQuestions(page - 1, size, user);
         List<Question> questions = questionPage.getContent();
 
@@ -79,7 +81,7 @@ public class QuestionController {
 
     @DeleteMapping("{question-id}")
     public ResponseEntity<Object> deleteQuestion(@AuthenticationPrincipal User user,
-                                         @PathVariable("question-id") @Positive Long questionId) {
+                                                 @PathVariable("question-id") @Positive Long questionId) {
         questionService.deleteQuestion(questionId, user);
 
         return ResponseEntity.noContent().build();
@@ -91,12 +93,7 @@ public class QuestionController {
                                      @RequestBody AnswerDto.Post answerPostDto) {
         answerPostDto.addQuestionId(questionId);
         answerService.createAnswer(answerMapper.answerPostDtoToAnswer(answerPostDto), user);
-//        Answer answer = answerMapper.answerPostDtoToAnswer(answerPostDto);
-//        answer.setQuestionId(questionId);
-//        answerService.createAnswer(answer);
-
-//        URI uri = UriComponentsBuilder.newInstance().build(DEFAULT_ANSWER_URI);
-        URI uri = UriCreator.createURI(questionId);
+        URI uri = UriCreator.createURI(ANSWER_DEFAULT_URL, questionId);
         return ResponseEntity.created(uri).build();
     }
 }

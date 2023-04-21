@@ -114,5 +114,4 @@ public class Question extends BaseEntity {
             this.status = status;
         }
     }
-
 }

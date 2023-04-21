@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 @Getter
 public class ErrorResponse {
+
     private int status;
     private String message;
 

@@ -35,8 +35,6 @@ public interface QuestionMapper {
         return question;
     }
 
-
-
     default Question questionPatchToQuestion(QuestionDto.Patch requestBody) {
         User user = new User();
         user.setId(requestBody.getUserId());
@@ -46,8 +44,6 @@ public interface QuestionMapper {
 
         return question;
     }
-
-
 
     default QuestionDto.SingleResponse questionToQuestionResponse(Question question) {
         List<QuestionTagDto.Response> questionTagResponse = question.getQuestionTags()
@@ -60,10 +56,10 @@ public interface QuestionMapper {
 
         List<AnswerDto.Response> answerResponses = question.getAnswers().stream().map(answer ->
                 new AnswerDto.Response(
-                        answer.getAnswerId(),
-                        answer.getContent(),
                         answer.getUser().getId(),
                         answer.getQuestion().getId(),
+                        answer.getAnswerId(),
+                        answer.getContent(),
                         answer.getIsAccepted()
                 )).collect(Collectors.toList());
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 @Getter
 public class MultiResponse<T> {
+
     private final List<T> data;
     private final PageInfo pageInfo;
 

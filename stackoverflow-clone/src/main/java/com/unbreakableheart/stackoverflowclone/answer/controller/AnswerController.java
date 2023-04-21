@@ -29,8 +29,8 @@ public class AnswerController {
 
     @PatchMapping("/{answer-id}")
     public ResponseEntity<SingleResponse<AnswerDto.Response>> patchAnswer(@AuthenticationPrincipal User user,
-                                      @PathVariable("answer-id") long answerId,
-                                      @RequestBody AnswerDto.Patch answerPatchDto) {
+                                                                          @PathVariable("answer-id") long answerId,
+                                                                          @RequestBody AnswerDto.Patch answerPatchDto) {
         answerPatchDto.setAnswerId(answerId);
         Answer answer = answerService.updateAnswer(answerMapper.answerPatchDtoToAnswer(answerPatchDto), user);
         AnswerDto.Response response = answerMapper.answerToAnswerDtoResponse(answer);
@@ -39,8 +39,8 @@ public class AnswerController {
 
     @GetMapping
     public ResponseEntity<MultiResponse<AnswerDto.Response>> getAnswers(@AuthenticationPrincipal User user,
-                                     @RequestParam @Positive int page,
-                                     @RequestParam @Positive int size) {
+                                                                        @RequestParam @Positive int page,
+                                                                        @RequestParam @Positive int size) {
         Page<Answer> answerPage = answerService.findAnswers(page - 1, size, user);
         List<AnswerDto.Response> response = answerMapper.answersToAnswerDtoResponses(answerPage.getContent());
         return ResponseEntity.ok(new MultiResponse<>(answerPage, response));
@@ -48,7 +48,7 @@ public class AnswerController {
 
     @DeleteMapping("/{answer-id}")
     public ResponseEntity<Object> deleteAnswer(@AuthenticationPrincipal User user,
-                                       @PathVariable("answer-id") long answerId) {
+                                               @PathVariable("answer-id") long answerId) {
         answerService.deleteAnswer(answerId, user);
         return ResponseEntity.noContent().build();
     }
