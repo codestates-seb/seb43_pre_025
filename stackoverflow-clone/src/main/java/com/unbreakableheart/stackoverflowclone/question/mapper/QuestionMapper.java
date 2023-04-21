@@ -40,6 +40,7 @@ public interface QuestionMapper {
         user.setId(requestBody.getUserId());
 
         Question question = Question.makeQuestion(requestBody.getTitle(), requestBody.getContent());
+        question.addQuestionId(requestBody.getQuestionId());
         question.setUser(user);
 
         return question;

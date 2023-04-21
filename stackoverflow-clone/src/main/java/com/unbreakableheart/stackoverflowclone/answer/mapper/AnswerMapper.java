@@ -13,6 +13,7 @@ public interface AnswerMapper {
     @Mapping(source = "userId", target = "user.id")
     @Mapping(source = "questionId", target = "question.id")
     Answer answerPostDtoToAnswer(AnswerDto.Post answerPostDto);
+    @Mapping(source = "questionId", target = "question.id")
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPostDto);
     List<AnswerDto.Response> answersToAnswerDtoResponses(List<Answer> answers);
     @Mapping(source = "user.id", target = "userId")

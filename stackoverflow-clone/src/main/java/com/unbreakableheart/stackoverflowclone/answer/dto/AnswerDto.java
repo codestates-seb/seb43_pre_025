@@ -26,6 +26,7 @@ public class AnswerDto {
     @AllArgsConstructor
     public static class Patch {
 
+        private Long userId;
         private Long questionId;
         private Long answerId;
         private String content;
