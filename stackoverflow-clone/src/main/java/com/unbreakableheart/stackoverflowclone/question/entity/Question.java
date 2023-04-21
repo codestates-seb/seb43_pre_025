@@ -3,7 +3,6 @@ package com.unbreakableheart.stackoverflowclone.question.entity;
 import com.unbreakableheart.stackoverflowclone.answer.entity.Answer;
 import com.unbreakableheart.stackoverflowclone.common.entity.BaseEntity;
 import com.unbreakableheart.stackoverflowclone.tag.entity.QuestionTag;
-import com.unbreakableheart.stackoverflowclone.tag.entity.Tag;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,27 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Setter
 @Getter
 @NoArgsConstructor
 public class Question extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "QUESTION_ID")
     private Long id;
-
     @Column(nullable = false)
     private String title;
-
     private String content;
-
     @Column(nullable = false)
     private int views;
-
     @Setter
     private QuestionStatus questionStatus;
-
-//    외래키
-
+    //    외래키
     @Setter
     @OneToMany(mappedBy = "question", cascade = CascadeType.PERSIST)
     private List<QuestionTag> questionTags = new ArrayList<>();
@@ -94,8 +89,7 @@ public class Question extends BaseEntity {
     }
 
     public static Question makeQuestion(String title, String content) {
-        Question madequestion = new Question(title, content, 0, QuestionStatus.QUESTION_REGISTERED);
-        return madequestion;
+        return new Question(title, content, 0, QuestionStatus.QUESTION_REGISTERED);
     }
 
     public void updateQuestion(String title, String content) {
@@ -119,6 +113,5 @@ public class Question extends BaseEntity {
             this.status = status;
         }
     }
-
 
 }
