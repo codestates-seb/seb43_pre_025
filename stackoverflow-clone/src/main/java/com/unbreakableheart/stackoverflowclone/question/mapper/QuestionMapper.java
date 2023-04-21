@@ -40,6 +40,7 @@ public interface QuestionMapper {
         user.setId(requestBody.getUserId());
 
         Question question = Question.makeQuestion(requestBody.getTitle(), requestBody.getContent());
+        question.addQuestionId(requestBody.getQuestionId());
         question.setUser(user);
 
         return question;
@@ -56,9 +57,9 @@ public interface QuestionMapper {
 
         List<AnswerDto.Response> answerResponses = question.getAnswers().stream().map(answer ->
                 new AnswerDto.Response(
+                        answer.getAnswerId(),
                         answer.getUser().getId(),
                         answer.getQuestion().getId(),
-                        answer.getAnswerId(),
                         answer.getContent(),
                         answer.getIsAccepted()
                 )).collect(Collectors.toList());
