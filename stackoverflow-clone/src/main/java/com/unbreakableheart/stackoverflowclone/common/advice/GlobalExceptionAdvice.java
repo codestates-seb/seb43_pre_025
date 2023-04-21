@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionAdvice {
+
     @ExceptionHandler
     public ResponseEntity handleCustomException(CustomException exception) {
         ErrorResponse errorResponse = ErrorResponse.of(exception.getExceptionCode());
@@ -19,6 +20,7 @@ public class GlobalExceptionAdvice {
 
     @ExceptionHandler
     public ErrorResponse handleException(Exception e){
+        log.info("error 500");
         return ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

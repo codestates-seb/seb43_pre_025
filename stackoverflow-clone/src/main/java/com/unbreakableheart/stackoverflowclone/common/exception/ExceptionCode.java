@@ -6,6 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ExceptionCode {
+
     MEMBER_NOT_FOUND(404, "회원을 찾을 수 없습니다."),
     QUESTION_NOT_FOUND(404, "질문을 찾을 수 없습니다."),
     ANSWER_NOT_FOUND(404, "답변을 찾을 수 없습니다."),

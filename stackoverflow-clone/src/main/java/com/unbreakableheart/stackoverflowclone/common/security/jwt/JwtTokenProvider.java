@@ -25,10 +25,10 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
+
     private Key key;
     @Value("${jwt.secret}")
     private String secretKey;
-
     private final UserDetailsService userDetailsService;
     private final Long accessTokenExpiration = 1000L * 60 * 60;
     private final Long refreshTokenExpiration = 1000L * 60 * 60 * 60;
@@ -41,7 +41,6 @@ public class JwtTokenProvider {
         key = Keys.hmacShaKeyFor(keyBytes);
         log.info("[init] JwtTokenProvider 내 secretKey : {} 초기화 완료", secretKey);
     }
-
 
     public String generateAccessToken(String email, List<String> roles) {
         log.info("[generateToken] accessToken 생성");

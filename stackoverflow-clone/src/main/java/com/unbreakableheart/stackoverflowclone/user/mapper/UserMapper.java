@@ -8,6 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
+
     User postToUser(UserDto.Post post);
     User patchToUser(UserDto.Patch patch);
     UserDto.Response userToUserDtoResponse(User user);

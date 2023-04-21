@@ -15,7 +15,8 @@ public class AnswerDto {
         private Long userId;
         private Long questionId;
         private String content;
-        public void addQuestionId(Long questionId){
+
+        public void addQuestionId(Long questionId) {
             this.questionId = questionId;
         }
     }
@@ -33,6 +34,7 @@ public class AnswerDto {
             this.content = content;
         }
     }
+
     @Getter
     @AllArgsConstructor
     public static class Response {
