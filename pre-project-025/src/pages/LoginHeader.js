@@ -39,6 +39,9 @@ const LogoutButton = styled.button`
         height: 30px;
         color: hsl(0, 0%, 100%);
     }
+    &:hover {
+        background-color: hsl(31, 97%, 52%);
+    }
 `
 
 function LoginHeader() {
