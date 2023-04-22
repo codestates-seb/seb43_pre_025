@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import questionCreateBg from "../../assets/images/questionCreateBg.svg";
 import AskQuestionForm from "../../components/AskQuestionForm";
+import axios from 'axios';
+import { useState } from 'react';
 
 const QuestionCreatePage = styled.section`
   width: 100%;
@@ -80,7 +82,27 @@ const QuestionCreatePage = styled.section`
   }
 `;
 
+const fetchCreate = (url, data) => {
+  axios(url, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: "JWT 토큰 키",
+    },
+    data,
+  }).catch((err) => console.log('Error', err.message));
+};
+
 const AskQuestion = () => {
+  const [askTitle, askTitleSet] = useState('');
+  const [askBody, askBodySet] = useState('');
+  const handleSubmit = (title, content) => {
+    const data = { title, content };
+    // fetchCreate('http://15.165.244.155:8080/questions', data);
+    // dispatch(rendering());
+    // navigate('/');
+    // location.href = '/';
+  };
   return (
     <>
       <QuestionCreatePage>
@@ -117,11 +139,11 @@ const AskQuestion = () => {
             </div>
           </div>
           <AskQuestionForm
-          // askTitle={askTitle}
-          // askTitleSet={askTitleSet}
-          // askBody={askBody}
-          // askBodySet={askBodySet}
-          // handleSubmit={handleSubmit}
+          askTitle={askTitle}
+          askTitleSet={askTitleSet}
+          askBody={askBody}
+          askBodySet={askBodySet}
+          handleSubmit={handleSubmit}
           />
         </div>
       </QuestionCreatePage>
