@@ -66,9 +66,11 @@ public interface QuestionMapper {
 
         return new QuestionDto.SingleResponse(
                 question.getUser().getId(),
+                question.getUser().getUsername(),
                 question.getId(),
                 question.getTitle(),
                 question.getContent(),
+                question.getQuestionStatus().name(),
                 answerResponses
 //                question.getComments(),
 //                question.getAnswers(),
@@ -81,5 +83,7 @@ public interface QuestionMapper {
 
     @Mapping(source = "question.id", target = "questionId")
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "question.questionStatus", target = "status")
+    @Mapping(source = "user.username", target = "username")
     QuestionDto.Response questionToQuestionDtoResponse(Question question);
 }
