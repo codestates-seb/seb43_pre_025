@@ -2,12 +2,13 @@ package com.unbreakableheart.stackoverflowclone.answer.mapper;
 
 import com.unbreakableheart.stackoverflowclone.answer.dto.AnswerDto;
 import com.unbreakableheart.stackoverflowclone.answer.entity.Answer;
+import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
 public interface AnswerMapper {
 
     @Mapping(source = "userId", target = "user.id")
