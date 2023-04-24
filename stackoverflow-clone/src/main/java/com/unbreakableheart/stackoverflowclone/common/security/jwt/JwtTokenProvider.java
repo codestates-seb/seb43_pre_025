@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
@@ -32,6 +33,10 @@ public class JwtTokenProvider {
     private final UserDetailsService userDetailsService;
     private final Long accessTokenExpiration = 1000L * 60 * 60;
     private final Long refreshTokenExpiration = 1000L * 60 * 60 * 60;
+    @Value("${jwt.access.header}")
+    private final String accessHeader;
+    @Value("${jwt.refresh.header}")
+    private final String refreshHeader;
 
     @PostConstruct
     public void init() {
@@ -119,5 +124,13 @@ public class JwtTokenProvider {
             log.info("JWT claims string is empty.", e);
         }
         return false;
+    }
+
+    public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken) {
+        response.setStatus(HttpServletResponse.SC_OK);
+
+        response.setHeader(accessHeader, accessToken);
+        response.setHeader(refreshHeader, refreshToken);
+        log.info("Access Token, Refresh Token 헤더 설정");
     }
 }
