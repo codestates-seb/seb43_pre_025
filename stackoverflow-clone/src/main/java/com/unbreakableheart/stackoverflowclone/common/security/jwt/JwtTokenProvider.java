@@ -34,9 +34,9 @@ public class JwtTokenProvider {
     private final Long accessTokenExpiration = 1000L * 60 * 60;
     private final Long refreshTokenExpiration = 1000L * 60 * 60 * 60;
     @Value("${jwt.access.header}")
-    private final String accessHeader;
+    private String accessHeader;
     @Value("${jwt.refresh.header}")
-    private final String refreshHeader;
+    private String refreshHeader;
 
     @PostConstruct
     public void init() {
