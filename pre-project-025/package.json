@@ -20,7 +20,14 @@
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.2",
+<<<<<<< HEAD
+=======
+    "redux": "^4.2.1",
+>>>>>>> 99126425ee1616c82a963923ebd79e57f0d9d5d4
     "redux-actions": "^3.0.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
+    "store": "^2.0.12",
     "styled-components": "^5.3.9"
   },
   "scripts": {

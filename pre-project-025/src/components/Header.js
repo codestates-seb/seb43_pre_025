@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import mainLogo from '../assets/images/logo.png';
 import Search from './Search';
 import { Link, useNavigate } from 'react-router-dom';
-// import Profile from '../pages/Profile';
-// import { useSelector } from 'react-redux';
 import LoginHeader from '../pages/LoginHeader';
-
+import { useSelector } from 'react-redux';
 
 const StyledHeader = styled.header`
     width: 100%;
@@ -88,7 +86,7 @@ const LogoImg = styled.img`
         margin-top: -4px;
 `
 
-function Header() {
+const Header = () => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
@@ -98,6 +96,8 @@ function Header() {
     const hadleSignup = () => {
         navigate('./signup');
     };
+
+   const { user } = useSelector((state) => state.loginReducer);
 
     return (
         <StyledHeader>
@@ -110,12 +110,15 @@ function Header() {
                     <li>Products</li>
                     <li>For Teams</li>
                 </ul>
-                <Search/>
+                <Search/> 
+                {!user ? (
                 <div className="button-container">
                     <LoginButton onClick={handleLogin}>Log in</LoginButton>
                     <SignButton onClick={hadleSignup}>Sign up</SignButton>
                 </div>
+                ) : (
                 <LoginHeader />
+                )}
             </div>
         </StyledHeader>
     )

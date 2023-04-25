@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import SocialSignup from "./SocialSignup";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -95,28 +97,151 @@ const PolicyLink = styled.a`
   }
 `;
 
-function SignUp() {
+const SignUp= () => {
+
+    // 이름,이메일,비밀번호 전송
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    // 유효성 검사
+    const [isValidName, setIsValidName] = useState(false);
+    const [isValidEmail, setIsValidEmail] = useState(false);
+    const [isValidPassword, setisValidPassword] = useState(false);
+  
+    // 회원가입 완료 후 로그인 페이지로 이동
+    const navigate = useNavigate();
+  
+    // 회원가입 데이터 전송
+    const signUpSubmit = async () => {
+      try {
+        const response = await axios
+          .post(`https://e88c-110-14-12-165.ngrok-free.app/api/signup`, {
+            username,
+            email,
+            password,
+          })
+          .then(() => navigate('/login'));
+      } catch (error) {
+        window.alert('오류가 발생했습니다. 입력 사항을 확인해 주세요.');
+      }
+    };
+  
+    // DisplayName 유효성 검사 체크
+    const validationNameCheck = (nameVal) => {
+      if (nameVal.length >= 1) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+  
+    // email 유효성 검사 체크
+    const validationEmailCheck = (emailVal) => {
+      const emailRegex = // 이메일 형식 정규표현식
+        /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+  
+      return emailRegex.test(emailVal);
+    };
+  
+    // Password 유효성 검사 체크
+    const validationPasswordCheck = (passwordVal) => {
+      // 전체 8자 이상이어야 합니다.
+      const isValidPassword = passwordVal.length >= 8;
+      if (isValidPassword) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+  
+    // 이름
+    const onNameHandler = (e) => {
+      let targetValue = e.currentTarget.value;
+      setUsername(targetValue);
+  
+      if (validationNameCheck(targetValue)) {
+        setIsValidName(false);
+      } else {
+        setIsValidName(true);
+      }
+    };
+  
+    // 이메일
+    const onEmailHandler = (e) => {
+      let targetValue = e.currentTarget.value;
+      setEmail(targetValue);
+      if (validationEmailCheck(targetValue)) {
+        setIsValidEmail(false);
+      } else {
+        setIsValidEmail(true);
+      }
+    };
+  
+    // 패스워드
+    const onPasswordHandler = (e) => {
+      let targetValue = e.currentTarget.value;
+      setPassword(targetValue);
+      if (validationPasswordCheck(targetValue)) {
+        setisValidPassword(false);
+      } else {
+        setisValidPassword(true);
+      }
+    };
+  
+    // 회원가입 기능 구현
+    const onSignupHandler = (e) => {
+      e.preventDefault();
+      let validationName = validationNameCheck(username);
+      let validationEmail = validationEmailCheck(email);
+      let validationPassword = validationPasswordCheck(password);
+      if (validationName && validationEmail && validationPassword) {
+        signUpSubmit();
+      } else {
+        setIsValidName(!validationName);
+        setIsValidEmail(!validationEmail);
+        setisValidPassword(!validationPassword);
+        return;
+      }
+    };
+
+
   return (
     <Container>
+      <form onSubmit={(e) => e.preventDefault()}>
       <SocialSignup />
       <RegistrationWindow>
+
         <InputContainer>
           <InputLabel>Display name</InputLabel>
-          <InputField type="text" />
+          <InputField type="text" value={username} onChange={onNameHandler}/>
+          {isValidName && (
+              <div className="isvalid">Please enter a valid Display name.</div>
+            )}
         </InputContainer>
+
         <InputContainer>
           <InputLabel>Email</InputLabel>
-          <InputField type="email" />
+          <InputField type="email" value={email} onChange={onEmailHandler}/>
+          {isValidEmail && (
+              <div className="isvalid">Please enter a valid email address.</div>
+            )}
         </InputContainer>
-        <InputContainer>
+
+        <InputContainer >
           <InputLabel>Password</InputLabel>
-          <InputField type="password" />
+          <InputField type="password" value={password} onChange={onPasswordHandler}/>
           <PasswordRule>
+          {isValidPassword && (
+                <div className="isvalid">Please enter a valid Password.</div>
+              )}
             Passwords must contain at least eight characters, including at least
             1 letter and 1 number.
           </PasswordRule>
         </InputContainer>
-        <SignupButton>Sign&nbsp;up</SignupButton>
+
+        <SignupButton onClick={onSignupHandler}>Sign&nbsp;up</SignupButton>
+        
         <PolicyLinks>
           By clicking “Sign up”, you agree to our &nbsp;
           <PolicyLink
@@ -145,6 +270,7 @@ function SignUp() {
           {`Already have an account?`}
           <Link to="/login">Login</Link>
       </div>
+      </form>
     </Container>
   );
 }
