@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "member")
+@Entity(name = "user")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -32,6 +32,7 @@ public class User extends BaseEntity {
     private String username;
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
+
 
     public void addRoles(List<String> roles) {
         this.roles = roles;

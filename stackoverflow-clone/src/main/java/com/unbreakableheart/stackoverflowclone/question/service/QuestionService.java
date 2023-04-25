@@ -115,8 +115,8 @@ public class QuestionService {
 
     private void verifyPatchQuestion(Question question) {
         //Exception
-        //1. Member Exist
-        //2. Member is the writer
+        //1. User Exist
+        //2. User is the writer
         //3. Question Exist
         //4. Question Not Deleted
         Optional<Question> optionalQuestion = questionRepository.findById(question.getId());
