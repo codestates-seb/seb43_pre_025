@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const renderSlice = createSlice({
-  name: "renderReducer",
+  name: 'renderReducer',
   initialState: { render: false },
   reducers: {
     rendering: (state) => {

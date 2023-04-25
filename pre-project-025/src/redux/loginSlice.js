@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { addLocalStorage, removeLocalStroage } from "../utils/localStorage";
 import { loginAction } from "./actions";
 import { initialState } from "./initialState";
-// import { toast } from "react-toastify";
+// import { toast } from 'react-toastify';
 
 const loginSlice = createSlice({
   name: "loginReducer",
@@ -11,7 +11,7 @@ const loginSlice = createSlice({
     logOut: (state) => {
       state.user = null;
       removeLocalStroage();
-      // toast("See you next time👋");
+      // toast('See you next time👋');
     },
   },
   extraReducers: (builder) => {
@@ -25,8 +25,8 @@ const loginSlice = createSlice({
     });
     builder.addCase(loginAction.rejected, (state) => {
       state.status = "Fail";
-      // toast.error("The email or password is incorrect.", {
-      //   className: "toast-message",
+      // toast.error('The email or password is incorrect.', {
+      //   className: 'toast-message',
       // });
     });
   },

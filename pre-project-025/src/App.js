@@ -10,7 +10,7 @@ import QuestionDetail from "./pages/Questions/QuestionDetail";
 
 function App() {
   return (
-    <div>
+    <>
       <GlobalStyle />
       <Header />
       {/* outlet router용 */}
@@ -19,14 +19,12 @@ function App() {
           <Route index element={<QuestionList />}></Route>
           <Route path="/questions/answers" element={<QuestionDetail />} />
         </Route>
-      </Routes>
       {/* common router용 */}
-      <Routes>
         <Route path="/ask" element={<AskQuestion />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
