@@ -27,7 +27,10 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.httpBasic().disable()
+        httpSecurity
+                .cors().configurationSource(corsConfigurationSource())
+                .and()
+                .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
