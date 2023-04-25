@@ -21,7 +21,7 @@ const loginSlice = createSlice({
     builder.addCase(loginAction.fulfilled, (state, action) => {
       state.user = action.payload;
       addLocalStorage(state.user);
-      toast(`Hello! ${state.user.displayName}👋`);
+      toast(`Hello! ${state.user.username}👋`);
     });
     builder.addCase(loginAction.rejected, (state) => {
       state.status = 'Fail';
