@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import questionCreateBg from "../../assets/images/questionCreateBg.svg";
 import AskQuestionForm from "../../components/AskQuestionForm";
-import axios from 'axios';
 import { fetchCreate } from '../../utils/api';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { rendering } from '../../redux/renderSlice';
 
 const QuestionCreatePage = styled.section`
   width: 100%;
@@ -87,10 +88,11 @@ const QuestionCreatePage = styled.section`
 const AskQuestion = () => {
   const [askTitle, askTitleSet] = useState('');
   const [askBody, askBodySet] = useState('');
+  const dispatch = useDispatch();
   const handleSubmit = (title, content) => {
     const data = { title, content };
-    fetchCreate('https://98c3-110-14-12-165.ngrok-free.app/api/questions', data);
-    // dispatch(rendering());
+    fetchCreate('https://ec62-110-14-12-165.ngrok-free.app/api/questions', data);
+    dispatch(rendering());
     // navigate('/');
     // location.href = '/';
   };
