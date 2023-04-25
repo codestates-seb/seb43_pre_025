@@ -3,8 +3,7 @@ import mainLogo from '../assets/images/logo.png';
 import Search from './Search';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginHeader from '../pages/LoginHeader';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const StyledHeader = styled.header`
     width: 100%;
@@ -87,8 +86,6 @@ const LogoImg = styled.img`
         margin-top: -4px;
 `
 
-axios.defaults.withCredentials = true;
-
 const Header = () => {
     const navigate = useNavigate();
 
@@ -100,24 +97,7 @@ const Header = () => {
         navigate('./signup');
     };
 
-    const [isLogin, setIsLogin] = useState(false);
-  
-    const authHandler = () => {
-      axios
-        .get('https://165d-110-14-12-165.ngrok-free.app/api/questions')
-        .then((res) => {
-          setIsLogin(true);
-        })
-        .catch((err) => {
-          if (err.response.status === 404) {
-            console.log(err.response.data);
-          }
-        });
-    };
-
-    useEffect(() => {
-        authHandler();
-      }, []);
+   const { user } = useSelector((state) => state.loginReducer);
 
     return (
         <StyledHeader>
@@ -131,11 +111,10 @@ const Header = () => {
                     <li>For Teams</li>
                 </ul>
                 <Search/> 
-                {!isLogin ? (
+                {!user ? (
                 <div className="button-container">
-                    <LoginButton onClick={handleLogin} setIsLogin={setIsLogin}>Log in</LoginButton>
-                    <SignButton onClick={hadleSignup} isLogin={isLogin}
-                  setIsLogin={setIsLogin}>Sign up</SignButton>
+                    <LoginButton onClick={handleLogin}>Log in</LoginButton>
+                    <SignButton onClick={hadleSignup}>Sign up</SignButton>
                 </div>
                 ) : (
                 <LoginHeader />

@@ -97,20 +97,47 @@ const PolicyLink = styled.a`
   }
 `;
 
-const SignUp= () => {
+const SignUp= ({setIsSignup, setUserInfo }) => {
+
+  const [signupInfo, setSignupInfo] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleInputValue = (key) => (e) => {
+    setSignupInfo({ ...signupInfo, [key]: e.target.value });
+  };
+  const signupRequestHandler = () => {
+    return axios
+      .post('https://165d-110-14-12-165.ngrok-free.app/api/signup', { signupInfo })
+      .then((res) => {
+        setIsSignup(true);
+        setUserInfo(res.data);
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setErrorMessage('회원가입에 실패했습니다.');
+        }
+      });
+  };
+
+
   return (
     <Container>
+      <form onSubmit={(e) => e.preventDefault()}>
       <SocialSignup />
       <RegistrationWindow>
-        <InputContainer>
+        <InputContainer onChange={handleInputValue('username')}>
           <InputLabel>Display name</InputLabel>
           <InputField type="text" />
         </InputContainer>
-        <InputContainer>
+        <InputContainer onChange={handleInputValue('email')}>
           <InputLabel>Email</InputLabel>
           <InputField type="email" />
         </InputContainer>
-        <InputContainer>
+        <InputContainer onChange={handleInputValue('password')}>
           <InputLabel>Password</InputLabel>
           <InputField type="password" />
           <PasswordRule>
@@ -118,7 +145,15 @@ const SignUp= () => {
             1 letter and 1 number.
           </PasswordRule>
         </InputContainer>
-        <SignupButton>Sign&nbsp;up</SignupButton>
+        <SignupButton onClick={signupRequestHandler}>Sign&nbsp;up</SignupButton>
+        
+        {errorMessage ? (
+                <div id='alert-message' data-testid='alert-message'>{errorMessage}
+              </div>
+              ) : (
+                ''
+                )}
+
         <PolicyLinks>
           By clicking “Sign up”, you agree to our &nbsp;
           <PolicyLink
@@ -147,6 +182,7 @@ const SignUp= () => {
           {`Already have an account?`}
           <Link to="/login">Login</Link>
       </div>
+      </form>
     </Container>
   );
 }

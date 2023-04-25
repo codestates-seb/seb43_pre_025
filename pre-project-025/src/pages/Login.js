@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '../redux/actions';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = styled.section`
   width: 100%;
@@ -107,64 +109,98 @@ const LoginButton = styled.button`
   border: 1px solid hsl(206, 100%, 52%);
 `;
 
-const Login = ({ setUserInfo, setIsLogin }) => {
-  
-  const [loginInfo, setLoginInfo] = useState({
-    email: '',
-    password: '',
-  });
+const Login = () => {
 
-  const [errorMessage, setErrorMessage] = useState('');
-  const handleInputValue = (key) => (e) => {
-    setLoginInfo({ ...loginInfo, [key]: e.target.value });
-  };
-  const loginRequestHandler = () => {
-    const { email, password } = loginInfo;
-    if (!email || !password) {
-      setErrorMessage('아이디와 비밀번호를 입력하세요');
-      return;
-    } else {
-      setErrorMessage('');
+  const initialInfo = { email: '', password: '' };
+  const [loginInfo, loginInfoSet] = useState(initialInfo);
+  const [emptyEmail, emptyEmailSet] = useState(false);
+  const [emptyPassword, emptyPasswordSet] = useState(false);
+  const [invalidEmail, invalidEmailSet] = useState(false);
+  const [invalidPassword, invalidPasswordSet] = useState(false);
+  const [loginFailed, loginFailedSet] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.loginReducer);
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+      loginFailedSet(false);
     }
-    return axios
-      .post('https://165d-110-14-12-165.ngrok-free.app/api/login', { loginInfo })
-      .then((res) => {
-        setIsLogin(true);
-        setUserInfo(res.data);
-      })
-      .catch((err) => {
-        if (err.response.status === 404) {
-          setErrorMessage('로그인에 실패했습니다.');
-        }
-      });
+  }, [user]);
+
+  const handeLogin = (email, password) => {
+    // eslint-disable-next-line
+    const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    const passwordRegex = /^[A-Za-z\d!@#$%^&*()_+~\-=]{8,40}$/;
+
+    // 비어있으면 empty메세지 출력
+    if (email === '') emptyEmailSet(true);
+    // 유효하지않으면(이메일 형식) invalid 메세지 출력
+    else if (!emailRegex.test(email)) {
+      emptyEmailSet(false);
+      invalidEmailSet(true);
+    }
+
+    // 비어있으면 empty메세지 출력
+    if (password === '') emptyPasswordSet(true);
+    // 유효하지않으면(8자 이상) invalid 메세지 출력
+    else if (!passwordRegex.test(password)) {
+      emptyPasswordSet(false);
+      invalidPasswordSet(true);
+    }
+    // 유효한 이메일과 패스워드이면 로그인 요청
+    if (emailRegex.test(email) && passwordRegex.test(password)) {
+      emptyEmailSet(false);
+      emptyPasswordSet(false);
+      invalidEmailSet(false);
+
+      dispatch(loginAction({ email, password }));
+    }
   };
-
-
+  
     return(
       <LoginPage>
         <div className="login-container">
           <SocialLogin />
           <LoginBox className="LoginBox">
-          <form onSubmit={(e) => e.preventDefault()}>
               <div className="login-email">
                 <label htmlFor="email">Email</label>
-                <UserInput id="email" type="email" onChange={handleInputValue('email')}/>
+                <UserInput id="email" type="email"           
+                value={loginInfo.email}
+          onChange={(event) =>
+            loginInfoSet({ ...loginInfo, email: event.target.value })
+          }
+          border={emptyEmail || loginFailed ? '#d0390e' : null}
+          focusBorder={emptyEmail || loginFailed ? '#d0390e' : null}
+          shadow={emptyEmail || loginFailed ? 'rgb(246,224,224)' : null}/>
+          {emptyEmail ? <p>Email cannot be empty.</p> : null}
+        {invalidEmail ? <p>The email is not a valid email address.</p> : null}
+        {loginFailed ? <p>The email or password is incorrect.</p> : null}
               </div>
+
               <div className="login-password">
                 <label htmlFor="email">Password</label>
-                <UserInput id="password" type="password" onChange={handleInputValue('password')}/>
+                <UserInput id="password" type="password"           
+                value={loginInfo.password}
+          onChange={(event) =>
+            loginInfoSet({ ...loginInfo, password: event.target.value })
+          }
+          border={emptyEmail || loginFailed ? '#d0390e' : null}
+          focusBorder={emptyEmail || loginFailed ? '#d0390e' : null}
+          shadow={emptyEmail || loginFailed ? 'rgb(246,224,224)' : null}/>
+        {emptyPassword ? <p>Password cannot be empty.</p> : null}
+        {invalidPassword ? (
+          <p>The password must be at least 8 characters long.</p>
+        ) : null}
+        {loginFailed ? <p>The email or password is incorrect.</p> : null}
               </div>
               <div>
-                <LoginButton onClick={loginRequestHandler} >Log in</LoginButton>
+                <LoginButton onClick={() => handeLogin(loginInfo.email, loginInfo.password)}>Log in</LoginButton>
                 </div>
-                {errorMessage ? (
-                <div id='alert-message' data-testid='alert-message'>{errorMessage}
-              </div>
-              ) : (
-                ''
-                )}
-                </form>
-          </LoginBox>
+                </LoginBox>
 
           <div className="signup-link">
           {`Don't have an account?`}

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {CgProfile} from 'react-icons/cg';
 import {AiOutlinePoweroff} from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const AfterContainer = styled.div`
     display: flex;
@@ -50,10 +51,12 @@ function LoginHeader() {
             <Profile>
             <CgProfile className="user-icon" />
             </Profile>
+            <Link to="/">
             <LogoutButton>
                 <AiOutlinePoweroff className="logout-icon"/>
                 <li>Logout</li>
             </LogoutButton>
+            </Link>
         </AfterContainer>
     )
 }
