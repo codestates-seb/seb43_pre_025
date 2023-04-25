@@ -2,6 +2,7 @@ import styled from "styled-components";
 import questionCreateBg from "../../assets/images/questionCreateBg.svg";
 import AskQuestionForm from "../../components/AskQuestionForm";
 import axios from 'axios';
+import { fetchCreate } from '../../utils/api';
 import { useState } from 'react';
 
 const QuestionCreatePage = styled.section`
@@ -82,23 +83,13 @@ const QuestionCreatePage = styled.section`
   }
 `;
 
-const fetchCreate = (url, data) => {
-  axios(url, {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: "JWT 토큰 키",
-    },
-    data,
-  }).catch((err) => console.log('Error', err.message));
-};
 
 const AskQuestion = () => {
   const [askTitle, askTitleSet] = useState('');
   const [askBody, askBodySet] = useState('');
   const handleSubmit = (title, content) => {
     const data = { title, content };
-    // fetchCreate('http://15.165.244.155:8080/questions', data);
+    fetchCreate('https://98c3-110-14-12-165.ngrok-free.app/api/questions', data);
     // dispatch(rendering());
     // navigate('/');
     // location.href = '/';
