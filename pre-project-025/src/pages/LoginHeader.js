@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import {CgProfile} from 'react-icons/cg';
-import {AiOutlinePoweroff} from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
+import { AiOutlinePoweroff } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { logOut } from '../redux/loginSlice';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const AfterContainer = styled.div`
     display: flex;
@@ -45,14 +48,22 @@ const LogoutButton = styled.button`
     }
 `
 
-function LoginHeader() {
+const LoginHeader = () =>  {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+  
+    const handleLogout = () => {
+      dispatch(logOut());
+      navigate('/');
+    };
+
     return (
         <AfterContainer>
             <Profile>
             <CgProfile className="user-icon" />
             </Profile>
             <Link to="/">
-            <LogoutButton>
+            <LogoutButton  onClick={() => handleLogout()}>
                 <AiOutlinePoweroff className="logout-icon"/>
                 <li>Logout</li>
             </LogoutButton>

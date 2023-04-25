@@ -126,7 +126,6 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate('/');
       loginFailedSet(false);
     }
   }, [user]);
@@ -158,6 +157,7 @@ const Login = () => {
       invalidEmailSet(false);
 
       dispatch(loginAction({ email, password }));
+      navigate('/');
     }
   };
   
