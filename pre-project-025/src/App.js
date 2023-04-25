@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/SignUp";
 import QuestionList from "./pages/Questions/QuestionList";
 import AskQuestion from "./pages/Questions/AskQuestion";
+import QuestionDetail from "./pages/Questions/QuestionDetail";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route index element={<QuestionList />}></Route>
+          <Route path="/questions/answers" element={<QuestionDetail />} />
         </Route>
       </Routes>
       {/* common router용 */}

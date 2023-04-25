@@ -1,7 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import { useParams, useNavigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import axios from 'axios';
+// import React, { useState, useEffect } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import styled from "styled-components";
 import { CommonButton } from "../../components/Buttons";
 import { Content } from "../../components/Content";
@@ -107,87 +107,88 @@ const QuestionDetail = () => {
   // const [isPending, setIsPending] = useState(false);
 
   // const navigate = useNavigate();
-  // const { user } = useSelector((state) => state.loginReducer);
+  const { user } = useSelector((state) => state.loginReducer);
 
   // const handleAskQuestion = () => {
   //   if (user) navigate('/ask');
   //   else navigate('/login');
   // };
 
-  // const handleAnswerSubmit = (body) => {
-  //   const data = { content: body };
-  //   axios(`http://15.165.244.155:8080/questions/${params.id}/answers`, {
-  //     method: 'post',
-  //     headers: {
-  //       Authorization: user.token,
-  //     },
-  //     data,
-  //   })
-  //     .then((res) => {
-  //       const newAnswer = { ...res.data, voteCount: 0 };
-  //       setQuestionData({
-  //         ...questionData,
-  //         answers: [...questionData.answers, newAnswer],
-  //       });
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
+  // eslint-disable-next-line no-unused-vars
+  const handleAnswerSubmit = (body) => {
+    const data = { content: body };
+    axios(`https://d17d-110-14-12-165.ngrok-free.app/api/questions`, {
+      method: "post",
+      headers: {
+        Authorization: user.token,
+      },
+      data,
+    });
+    //     .then((res) => {
+    //       const newAnswer = { ...res.data, voteCount: 0 };
+    //       setQuestionData({
+    //         ...questionData,
+    //         answers: [...questionData.answers, newAnswer],
+    //       });
+    //     })
+    //     .catch((err) => console.error(err));
+    // };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsPending(true);
-  //     try {
-  //       const res = await axios(url, {
-  //         headers: {
-  //           Authorization: user?.token,
-  //         },
-  //       });
-  //       setQuestionData({ ...res.data });
-  //     } catch (err) {
-  //       navigate('/notfound');
-  //       console.error(err);
-  //     }
-  //     setIsPending(false);
-  //   };
-  //   fetchData();
-  // }, [url]);
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     setIsPending(true);
+    //     try {
+    //       const res = await axios(url, {
+    //         headers: {
+    //           Authorization: user?.token,
+    //         },
+    //       });
+    //       setQuestionData({ ...res.data });
+    //     } catch (err) {
+    //       navigate('/notfound');
+    //       console.error(err);
+    //     }
+    //     setIsPending(false);
+    //   };
+    //   fetchData();
+    // }, [url]);
 
-  // if (isPending && questionData === null) return <div>질문 불러오는 중...</div>;
-  // if (questionData) {
-  return (
-    <Container>
-      <div className="question-detail-container">
-        <QuestionHeader>
-          <h1>{/* <a href="?">{questionData.title}</a> */}</h1>
-          <div className="ask-btn-container">
-            <CommonButton
-              bgColor="var(--blue-500)"
-              color="#fff"
-              border="transparent"
-              onClick={() => {
-                // handleAskQuestion();
-              }}
-              className="ask-question-btn"
-            >
-              Ask Question
-            </CommonButton>
-          </div>
-        </QuestionHeader>
-        <Content
-        // type="question"
-        // author={questionData.author}
-        // content={questionData.content}
-        // votes={questionData.voteCount}
-        // isUpVoter={questionData.isUpVoter}
-        // isDownVoter={questionData.isDownVoter}
-        // createdAt={questionData.createdAt}
-        // updatedAt={questionData.updatedAt}
-        // id={questionData.questionId}
-        // questionData={questionData}
-        // updateData={setQuestionData}
-        />
-      </div>
-      {/* {questionData.answers.length > 0 && (
+    // if (isPending && questionData === null) return <div>질문 불러오는 중...</div>;
+    // if (questionData) {
+    return (
+      <Container>
+        <div className="question-detail-container">
+          <QuestionHeader>
+            <h1>{/* <a href="?">{questionData.title}</a> */}</h1>
+            <div className="ask-btn-container">
+              <CommonButton
+                bgColor="var(--blue-500)"
+                color="#fff"
+                border="transparent"
+                onClick={() => {
+                  // handleAskQuestion();
+                }}
+                className="ask-question-btn"
+              >
+                Ask Question
+              </CommonButton>
+            </div>
+          </QuestionHeader>
+          <Content
+          // type="question"
+          // author={questionData.author}
+          // content={questionData.content}
+          // votes={questionData.voteCount}
+          // isUpVoter={questionData.isUpVoter}
+          // isDownVoter={questionData.isDownVoter}
+          // createdAt={questionData.createdAt}
+          // updatedAt={questionData.updatedAt}
+          // id={questionData.questionId}
+          // questionData={questionData}
+          // updateData={setQuestionData}
+          />
+        </div>
+        {/* {questionData.answers.length > 0 && (
           <>
             <AnswersHeader count={questionData.answers.length} />
             {questionData.answers.map((answer) => {
@@ -210,12 +211,12 @@ const QuestionDetail = () => {
             })}
           </>
         )} */}
-      <AnswersHeader />
-      <YourAnswerHeader>Your Answer</YourAnswerHeader>
-      {/* <AnswerForm onClickHandler={handleAnswerSubmit} /> */}
-      <AnswerForm />
-    </Container>
-  );
+        <AnswersHeader />
+        <YourAnswerHeader>Your Answer</YourAnswerHeader>
+        <AnswerForm onClickHandler={handleAnswerSubmit} />
+      </Container>
+    );
+  };
 };
 
 export default QuestionDetail;
