@@ -116,7 +116,7 @@ const SignUp= () => {
     const signUpSubmit = async () => {
       try {
         const response = await axios
-          .post(`https://e88c-110-14-12-165.ngrok-free.app/api/signup`, {
+          .post(`https://ec62-110-14-12-165.ngrok-free.app/api/signup`, {
             username,
             email,
             password,
