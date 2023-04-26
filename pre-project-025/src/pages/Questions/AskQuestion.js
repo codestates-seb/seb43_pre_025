@@ -91,12 +91,13 @@ const AskQuestion = () => {
   const handleSubmit = (title, content) => {
     const data = { title, content };
     fetchCreate(
-      "https://3c1e-110-14-12-165.ngrok-free.app//api/questions",
+      "https://7168-110-14-12-165.ngrok-free.app/api/questions",
       data
     );
     dispatch(rendering());
     // navigate('/');
-    // location.href = '/';
+    // eslint-disable-next-line no-restricted-globals
+    location.href = "/";
   };
   return (
     <>
