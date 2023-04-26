@@ -2,17 +2,18 @@ package com.unbreakableheart.stackoverflowclone.common.security.oauth.handler;
 
 import com.unbreakableheart.stackoverflowclone.common.security.jwt.JwtTokenProvider;
 import com.unbreakableheart.stackoverflowclone.common.security.oauth.CustomOAuth2User;
-import com.unbreakableheart.stackoverflowclone.user.entity.Role;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 
 @Slf4j
@@ -40,5 +41,16 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         log.info("refreshToken : {}", refreshToken);
 
         jwtTokenProvider.sendAccessAndRefreshToken(response, accessToken, refreshToken);
+        response.sendRedirect(createURI());
+    }
+
+    private String createURI(){
+        return UriComponentsBuilder.newInstance()
+                .scheme("http")
+                .host("localhost")
+                .port(3000)
+                .encode(StandardCharsets.UTF_8)
+                .build()
+                .toUriString();
     }
 }
