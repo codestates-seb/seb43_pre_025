@@ -92,14 +92,11 @@ const AskQuestion = () => {
 
   const handleSubmit = (title, content) => {
     const data = { title, content };
-<<<<<<< HEAD
     fetchCreate('https://3c1e-110-14-12-165.ngrok-free.app/api/questions', data);
-=======
     fetchCreate(
       "http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/questions",
       data
     );
->>>>>>> ab0b642ee8252d61e0cdf27a53dedce636b72c22
     dispatch(rendering());
     // navigate('/');
     // eslint-disable-next-line no-restricted-globals
