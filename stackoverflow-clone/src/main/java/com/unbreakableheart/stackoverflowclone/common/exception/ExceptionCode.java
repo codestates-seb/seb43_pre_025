@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum ExceptionCode {
 
     MEMBER_NOT_FOUND(404, "회원을 찾을 수 없습니다."),
+    MEMBER_NOT_MATCH(407, "작성자만 이용가능합니다."),
     QUESTION_NOT_FOUND(404, "질문을 찾을 수 없습니다."),
     ANSWER_NOT_FOUND(404, "답변을 찾을 수 없습니다."),
     MEMBER_EMAIL_EXISTS(406, "이미 사용중인 이메일입니다."),

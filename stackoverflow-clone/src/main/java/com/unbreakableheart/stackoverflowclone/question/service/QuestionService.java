@@ -63,7 +63,8 @@ public class QuestionService {
 
     public Question updateQuestion(Question question, User user) {
         verifyPatchQuestion(question);
-        userService.findUserByEmail(user.getEmail());
+        User authentication = userService.findUserByEmail(user.getEmail());
+        userService.isMatchUser(question.getUser(), authentication);
 
         //    Logic
         //Question 변경 로직//
@@ -97,10 +98,10 @@ public class QuestionService {
     }
 
     public void deleteQuestion(Long questionId, User user) {
-        userService.findUserByEmail(user.getEmail());
         verifyGetQuestion(questionId);
-
         Question question = questionRepository.findById(questionId).get();
+        User authentication = userService.findUserByEmail(user.getEmail());
+        userService.isMatchUser(question.getUser(), authentication);
         question.setQuestionStatus(Question.QuestionStatus.QUESTION_DELETED);
     }
 
