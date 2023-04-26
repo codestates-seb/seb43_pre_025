@@ -116,7 +116,7 @@ const SignUp = () => {
     try {
       // eslint-disable-next-line no-unused-vars
       const response = await axios
-        .post(`https://7168-110-14-12-165.ngrok-free.app/api/signup`, {
+        .post(`http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/signup`, {
           username,
           email,
           password,

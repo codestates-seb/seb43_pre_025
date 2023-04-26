@@ -7,7 +7,7 @@ export const loginAction = createAsyncThunk(
   "loginSlice/loginAction",
   async (payload) => {
     const response = await axios(
-      "https://7168-110-14-12-165.ngrok-free.app/api/login",
+      "http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/login",
       {
         method: "post",
         headers: {

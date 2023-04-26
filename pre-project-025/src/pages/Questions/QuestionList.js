@@ -60,11 +60,15 @@ const QuestionList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      try {
       const response = await axios.get(
-        `https://7168-110-14-12-165.ngrok-free.app/api/questions?page=1&size=10 `
+        `http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/questions?page=1&size=10?`
       );
       setQuestion(response.data.data);
-    };
+    } catch (e) {
+      window.alert('오류가 발생했습니다.');
+    }
+  };
     fetchData();
   }, [render]);
 
@@ -88,7 +92,7 @@ const QuestionList = () => {
         </AskBtn>
       </QuestionHeader>
       <div>
-        {questions.map((question, index) => {
+        {questions?.map((question, index) => {
           return (
             <Questions
               key={question.questionId}

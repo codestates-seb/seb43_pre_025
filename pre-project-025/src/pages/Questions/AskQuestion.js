@@ -92,7 +92,7 @@ const AskQuestion = () => {
   const handleSubmit = (title, content) => {
     const data = { title, content };
     fetchCreate(
-      "https://7168-110-14-12-165.ngrok-free.app/api/questions",
+      "http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/questions",
       data
     );
     dispatch(rendering());
