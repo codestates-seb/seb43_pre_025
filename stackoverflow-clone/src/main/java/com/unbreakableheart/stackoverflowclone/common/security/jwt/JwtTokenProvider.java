@@ -3,6 +3,7 @@ package com.unbreakableheart.stackoverflowclone.common.security.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,8 +35,10 @@ public class JwtTokenProvider {
     private final Long accessTokenExpiration = 1000L * 60 * 60;
     private final Long refreshTokenExpiration = 1000L * 60 * 60 * 60;
     @Value("${jwt.access.header}")
+    @Getter
     private String accessHeader;
     @Value("${jwt.refresh.header}")
+    @Getter
     private String refreshHeader;
 
     @PostConstruct
@@ -93,7 +96,7 @@ public class JwtTokenProvider {
         return info;
     }
 
-    protected String resolveToken(HttpServletRequest request) {
+    public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
             return bearerToken.replace("Bearer ", "");
