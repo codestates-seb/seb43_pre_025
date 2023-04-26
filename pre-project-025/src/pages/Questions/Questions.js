@@ -65,30 +65,26 @@ const Qusetions = ({ questions }) => {
     navigate(`questions/${questionId}`);
   };
 
-    // 질문 작성 시간 구현
-    const getCreatedAt = (time) => {
-      let getTime = getTimeElapsed(time);
-      if (getTime.split(' ')[0] > 24 && getTime.split(' ')[1] === 'hours') {
-        getTime = getDaysElapsed(time);
-      }
-      return getTime;
-    };
-
   return (
     <div>
       <QuestionContainer>
         <>
           <div className="container">
+            {/* <PostSummary
+              // 질문 투표 수
+              // voteNum={questions?.voteCount}
+              // 질문 답변 수
+              answerNum={questions?.answerNum}
+            /> */}
             <div className="questions">
               <div
                 className="question-title"
                 onClick={() => {
-                  detailQuestionView(questions.questionId);
+                  detailQuestionView(questions?.questionId);
                 }}
                 role="button"
                 tabIndex="0"
               >
-                {/* 질문 제목 들어올 곳 */}
                 {questions?.title}
               </div>
               <UserInfo>

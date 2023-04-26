@@ -60,10 +60,10 @@ const QuestionList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-          const response = await axios.get(
-            `https://7168-110-14-12-165.ngrok-free.app/api/questions?&size=50`
-          );
-          setQuestion(response.data.data);
+      const response = await axios.get(
+        `https://7168-110-14-12-165.ngrok-free.app/api/questions?page=1&size=10 `
+      );
+      setQuestion(response.data.data);
     };
     fetchData();
   }, [render]);
