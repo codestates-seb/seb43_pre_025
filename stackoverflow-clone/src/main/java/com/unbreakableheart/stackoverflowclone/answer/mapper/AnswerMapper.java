@@ -5,10 +5,11 @@ import com.unbreakableheart.stackoverflowclone.answer.entity.Answer;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))
+@Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true), unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AnswerMapper {
 
     @Mapping(source = "userId", target = "user.id")
