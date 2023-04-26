@@ -1,12 +1,9 @@
-// import { useParams, useNavigate } from 'react-router-dom';
-// eslint-disable-next-line import/no-unresolved
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-// eslint-disable-next-line import/no-unresolved
-// import { UserInfo } from './UserInfo';
-// import { getTimeElapsed } from '../utils/timeElapsed';
-// import { ContentViewer } from './ContentViewer';
-// import { useSelector } from 'react-redux';
-// import axios from 'axios';
+import { UserInfo } from "./UserInfo";
+import { ContentViewer } from "./ContentViewer";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const ContentWrapper = styled.section`
   display: flex;
@@ -56,64 +53,66 @@ const Options = styled.div`
 
 export const Content = ({
   type,
-  // author,
-  // content,
-  // id,
-  // questionData,
+  author,
+  content,
+  id,
+  questionData,
+  updateData,
 }) => {
-  // const { user } = useSelector((state) => state.loginReducer);
-  // const params = useParams();
+  const { user } = useSelector((state) => state.loginReducer);
+  const params = useParams();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleEdit = () => {
-    // type === 'question'
-    //   ? navigate(`/edit/${params.id}`)
-    //   : navigate(`/edit/answers/${id}`, {
-    //       state: {
-    //         questionId: questionData.questionId,
-    //         questionTitle: questionData.title,
-    //         questionContent: questionData.content,
-    //         answer: content,
-    //       },
-    //     });
+    type === "question"
+      ? navigate(`/edit/${params.id}`)
+      : navigate(`/edit/answers/${id}`, {
+          state: {
+            questionId: questionData.questionId,
+            questionTitle: questionData.title,
+            questionContent: questionData.content,
+            answer: content,
+          },
+        });
   };
 
   const handleDelete = () => {
-    // if (window.confirm('Are you sure you want to delete?')) {
-    //   axios(`http://15.165.244.155:8080/${type}s/${id}`, {
-    //     method: 'delete',
-    //     headers: {
-    //       Authorization: user.token,
-    //     },
-    //   })
-    //     .then(() => {
-    //       if (type === 'question') {
-    //         location.href = '/';
-    //       } else if (type === 'answer') {
-    //         updateData({
-    //           ...questionData,
-    //           answers: questionData.answers.filter((el) => el.answerId !== id),
-    //         });
-    //       }
-    //     })
-    //     .catch((err) => console.error(err));
-    // }
+    if (window.confirm("Are you sure you want to delete?")) {
+      axios(`https://7168-110-14-12-165.ngrok-free.app/api/${type}s/${id}`, {
+        method: "delete",
+        headers: {
+          Authorization: user.token,
+        },
+      })
+        .then(() => {
+          if (type === "question") {
+            // eslint-disable-next-line no-restricted-globals
+            location.href = "/";
+          } else if (type === "answer") {
+            updateData({
+              ...questionData,
+              answers: questionData.answers.filter((el) => el.answerId !== id),
+            });
+          }
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   return (
     <ContentWrapper className={type + "-container"}>
       <div className="main-content">
-        {/* <ContentViewer content={content} /> */}
+        <ContentViewer content={content} />
         <Utils>
           <Options>
-            {/* {user?.userId === author.userId && (
-              <> */}
-            <button onClick={() => handleEdit()}>Edit</button>
-            <button onClick={() => handleDelete()}>Delete</button>
-            {/* </>
-            )} */}
+            {user?.userId === author.userId && (
+              <>
+                <button onClick={() => handleEdit()}>Edit</button>
+                <button onClick={() => handleDelete()}>Delete</button>
+              </>
+            )}
           </Options>
-          {/* <UserInfo type={type} author={author} /> */}
+          <UserInfo type={type} author={author} />
         </Utils>
       </div>
     </ContentWrapper>
