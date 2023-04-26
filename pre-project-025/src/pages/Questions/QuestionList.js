@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { AskBtn, BottomBtn, SortBtn } from '../../components/Buttons';
-import Loading from '../../components/Loading';
+import { AskBtn } from '../../components/Buttons';
 import Questions from './Questions';
 
 const QuestionListPage = styled.div`
@@ -62,7 +61,7 @@ const QuestionList = () => {
   useEffect(() => {
     const fetchData = async () => {
           const response = await axios.get(
-            `http://15.165.244.155:8080/questions?page=${page}&size=15`
+            `https://7168-110-14-12-165.ngrok-free.app/api/questions?&size=50`
           );
           setQuestion(response.data.data);
     };

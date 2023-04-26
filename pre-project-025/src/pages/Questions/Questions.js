@@ -89,17 +89,14 @@ const Qusetions = ({ questions }) => {
                 tabIndex="0"
               >
                 {/* 질문 제목 들어올 곳 */}
-                {questions.title}
+                {questions?.title}
               </div>
               <UserInfo>
                 <div className="user-container">
                   <div className="user-name">
                     <span className="written-name">written&nbsp;by&nbsp;</span>
                     {/* 작성자 username 들어올 곳 */}
-                    {questions.author.username}
-                  </div>
-                  <div className="created-time">
-                      asked {getCreatedAt(questions.createdAt)}
+                    {questions?.author.username}
                   </div>
                 </div>
               </UserInfo>
