@@ -71,29 +71,28 @@ const Qusetions = ({ questions }) => {
         <>
           <div className="container">
             <PostSummary
-            // 질문 투표 수
-            // voteNum={questions.voteCount}
-            // 질문 답변 수
-            // answerNum={questions.answerNum}
+              // 질문 투표 수
+              // voteNum={questions?.voteCount}
+              // 질문 답변 수
+              answerNum={questions?.answerNum}
             />
             <div className="questions">
               <div
                 className="question-title"
                 onClick={() => {
-                  detailQuestionView(questions.questionId);
+                  detailQuestionView(questions?.questionId);
                 }}
                 role="button"
                 tabIndex="0"
               >
-                {/* 질문 제목 들어올 곳 */}
-                {/* {questions.title} */}
+                {questions?.title}
               </div>
               <UserInfo>
                 <div className="user-container">
                   <div className="user-name">
                     <span className="written-name">written&nbsp;by&nbsp;</span>
                     {/* 작성자 username 들어올 곳 */}
-                    {/* {questions.author.displayName} */}
+                    {questions?.author.username}
                   </div>
                 </div>
               </UserInfo>

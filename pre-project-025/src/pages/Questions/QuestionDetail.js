@@ -154,7 +154,7 @@ const QuestionDetail = () => {
       setIsPending(false);
     };
     fetchData();
-  }, [navigate, url, user?.token]);
+  }, [url]);
 
   if (isPending && questionData === null) return <div>질문 불러오는 중...</div>;
   if (questionData) {
