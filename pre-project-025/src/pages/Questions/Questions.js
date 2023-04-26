@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import PostSummary from "./PostSummary";
 import { useNavigate } from "react-router-dom";
+import { getTimeElapsed, getDaysElapsed } from '../../utils/timeElapsed';
 
 const QuestionContainer = styled.div`
   .container {
@@ -65,17 +65,20 @@ const Qusetions = ({ questions }) => {
     navigate(`questions/${questionId}`);
   };
 
+    // 질문 작성 시간 구현
+    const getCreatedAt = (time) => {
+      let getTime = getTimeElapsed(time);
+      if (getTime.split(' ')[0] > 24 && getTime.split(' ')[1] === 'hours') {
+        getTime = getDaysElapsed(time);
+      }
+      return getTime;
+    };
+
   return (
     <div>
       <QuestionContainer>
         <>
           <div className="container">
-            <PostSummary
-            // 질문 투표 수
-            // voteNum={questions.voteCount}
-            // 질문 답변 수
-            // answerNum={questions.answerNum}
-            />
             <div className="questions">
               <div
                 className="question-title"
@@ -86,14 +89,17 @@ const Qusetions = ({ questions }) => {
                 tabIndex="0"
               >
                 {/* 질문 제목 들어올 곳 */}
-                {/* {questions.title} */}
+                {questions.title}
               </div>
               <UserInfo>
                 <div className="user-container">
                   <div className="user-name">
                     <span className="written-name">written&nbsp;by&nbsp;</span>
                     {/* 작성자 username 들어올 곳 */}
-                    {/* {questions.author.displayName} */}
+                    {questions.author.username}
+                  </div>
+                  <div className="created-time">
+                      asked {getCreatedAt(questions.createdAt)}
                   </div>
                 </div>
               </UserInfo>

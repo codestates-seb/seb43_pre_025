@@ -50,7 +50,7 @@ export const UserInfo = ({ type, author }) => {
         <AiOutlineUser size="32px" />
       </div>
       <div className="user-detail">
-        <a href="?">{author.displayName}</a>
+        <a href="?">{author.username}</a>
       </div>
     </UserInfoContainer>
   );

@@ -87,16 +87,16 @@ const QuestionCreatePage = styled.section`
 const AskQuestion = () => {
   const [askTitle, askTitleSet] = useState("");
   const [askBody, askBodySet] = useState("");
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (title, content) => {
     const data = { title, content };
     fetchCreate(
-      "https://3c1e-110-14-12-165.ngrok-free.app//api/questions",
-      data
-    );
+      "https://7168-110-14-12-165.ngrok-free.app/api/questions", data);
     dispatch(rendering());
     // navigate('/');
-    // location.href = '/';
+    // eslint-disable-next-line no-restricted-globals
+    location.href = '/';
   };
   return (
     <>
