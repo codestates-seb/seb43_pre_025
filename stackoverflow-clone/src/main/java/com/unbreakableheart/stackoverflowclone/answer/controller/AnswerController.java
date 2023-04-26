@@ -17,7 +17,6 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/answers")
 public class AnswerController {
 

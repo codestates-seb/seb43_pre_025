@@ -32,7 +32,6 @@ import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.QUES
 @RequestMapping("/api/questions")
 @Validated
 @Slf4j
-@CrossOrigin
 @RequiredArgsConstructor
 public class QuestionController {
 
@@ -44,6 +43,7 @@ public class QuestionController {
     @PostMapping
     public ResponseEntity<Object> postQuestion(@AuthenticationPrincipal UserPrincipal userPrincipal,
                                                @Valid @RequestBody QuestionDto.Post requestBody) {
+        log.info("post : {} {}", userPrincipal.getUser().getEmail(), requestBody.getTitle());
         User user = userPrincipal.getUser();
         Question question = questionService.createQuestion(mapper.questionPostToQuestion(requestBody), user);
         URI location = UriCreator.createURI(QUESTION_DEFAULT_URL, question.getId());
@@ -92,8 +92,8 @@ public class QuestionController {
 
     @PostMapping("/{question-id}/answers")
     public ResponseEntity<Object> postAnswer(@AuthenticationPrincipal UserPrincipal userPrincipal,
-                                     @PathVariable("question-id") long questionId,
-                                     @RequestBody AnswerDto.Post answerPostDto) {
+                                             @PathVariable("question-id") long questionId,
+                                             @RequestBody AnswerDto.Post answerPostDto) {
         User user = userPrincipal.getUser();
         answerPostDto.addQuestionId(questionId);
         answerService.createAnswer(answerMapper.answerPostDtoToAnswer(answerPostDto), user);

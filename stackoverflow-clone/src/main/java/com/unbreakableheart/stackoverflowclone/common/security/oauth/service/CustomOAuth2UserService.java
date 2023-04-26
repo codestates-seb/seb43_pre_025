@@ -1,5 +1,7 @@
 package com.unbreakableheart.stackoverflowclone.common.security.oauth.service;
 
+import com.unbreakableheart.stackoverflowclone.common.exception.CustomException;
+import com.unbreakableheart.stackoverflowclone.common.exception.ExceptionCode;
 import com.unbreakableheart.stackoverflowclone.common.security.oauth.CustomOAuth2User;
 import com.unbreakableheart.stackoverflowclone.common.security.oauth.OAuthAttributes;
 import com.unbreakableheart.stackoverflowclone.common.security.oauth.userinfo.ProviderType;
@@ -62,7 +64,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         if (provider.equals("kakao")) {
             return ProviderType.KAKAO;
         }
-        return ProviderType.GOOGLE;
+        if (provider.equals("google")) {
+            return ProviderType.GOOGLE;
+        }
+        throw new CustomException(ExceptionCode.PROVIDER_NOT_FOUND);
     }
 
     private User getUser(OAuthAttributes attributes, ProviderType providerType) {

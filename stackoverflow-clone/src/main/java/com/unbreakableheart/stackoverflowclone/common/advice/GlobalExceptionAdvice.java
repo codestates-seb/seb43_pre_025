@@ -20,7 +20,7 @@ public class GlobalExceptionAdvice {
 
     @ExceptionHandler
     public ErrorResponse handleException(Exception e){
-        log.info("error 500");
-        return ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR);
+        log.info("error 500 {}", e.toString());
+        return ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, e.toString());
     }
 }
