@@ -11,6 +11,7 @@ import com.unbreakableheart.stackoverflowclone.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -91,11 +92,8 @@ public class QuestionService {
 
     public Page<Question> findQuestions(int page, int size, User user) {
         userService.findUserByEmail(user.getEmail());
-        PageRequest pageImpl = PageRequest.of(page, size);
-        Page<Question> pageQuestions = questionRepository.findAll(pageImpl);
-
-        //삭제된 질문 조회 불가능하도록, 조회수 1증가 하도록 구현 필요//
-        return pageQuestions;
+        Pageable pageable = PageRequest.of(page, size);
+        return questionRepository.findAllByQuestionStatusNot(pageable, Question.QuestionStatus.QUESTION_DELETED);
     }
 
     public void deleteQuestion(Long questionId, User user) {
