@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import PostSummary from "./PostSummary";
 import { useNavigate } from "react-router-dom";
+import { getTimeElapsed, getDaysElapsed } from '../../utils/timeElapsed';
 
 const QuestionContainer = styled.div`
   .container {
@@ -70,12 +70,12 @@ const Qusetions = ({ questions }) => {
       <QuestionContainer>
         <>
           <div className="container">
-            <PostSummary
+            {/* <PostSummary
               // 질문 투표 수
               // voteNum={questions?.voteCount}
               // 질문 답변 수
               answerNum={questions?.answerNum}
-            />
+            /> */}
             <div className="questions">
               <div
                 className="question-title"

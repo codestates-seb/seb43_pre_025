@@ -103,7 +103,7 @@ const YourAnswerHeader = styled.h2`
 const QuestionDetail = () => {
   const params = useParams();
   const url =
-    "https://7168-110-14-12-165.ngrok-free.app/api/questions/" + [params.id];
+    "http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/questions/" + [params.id];
   const [questionData, setQuestionData] = useState(null);
   const [isPending, setIsPending] = useState(false);
 
@@ -118,7 +118,7 @@ const QuestionDetail = () => {
   const handleAnswerSubmit = (body) => {
     const data = { content: body };
     axios(
-      `https://7168-110-14-12-165.ngrok-free.app/api/questions/${params.id}/answers`,
+      `http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/questions/${params.id}/answers`,
       {
         method: "post",
         headers: {
