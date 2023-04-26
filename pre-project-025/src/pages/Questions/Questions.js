@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import PostSummary from "./PostSummary";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getTimeElapsed, getDaysElapsed } from '../../utils/timeElapsed';
 
 const QuestionContainer = styled.div`
   .container {
@@ -18,7 +18,7 @@ const QuestionContainer = styled.div`
     align-items: flex-start;
   }
 
-  /* .question-title {
+  .question-title {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -26,7 +26,7 @@ const QuestionContainer = styled.div`
     -webkit-box-orient: vertical;
     hyphens: auto;
     overflow-wrap: break-word;
-  } */
+  }
 
   .question-title {
     width: 100%;
@@ -58,38 +58,41 @@ const UserInfo = styled.div`
   }
 `;
 
-const Qusetions = () => {
-  // const navigate = useNavigate();
-  // // 질문 제목 클릭 시 페이지 이동 구현
-  // const detailQuestionView = (questionId) => {
-  //   navigate(`questions/${questionId}`);
-  // };
+const Qusetions = ({ questions }) => {
+  const navigate = useNavigate();
+  // 질문 제목 클릭 시 페이지 이동 구현
+  const detailQuestionView = (questionId) => {
+    navigate(`questions/${questionId}`);
+  };
 
   return (
     <div>
       <QuestionContainer>
         <>
           <div className="container">
-            <PostSummary
-            // voteNum={questions.voteCount}
-            // answerNum={questions.answerCount}
-            />
+            {/* <PostSummary
+              // 질문 투표 수
+              // voteNum={questions?.voteCount}
+              // 질문 답변 수
+              answerNum={questions?.answerNum}
+            /> */}
             <div className="questions">
               <div
                 className="question-title"
-                // onClick={() => {
-                //   detailQuestionView(questions.questionId);
-                // }}
+                onClick={() => {
+                  detailQuestionView(questions?.questionId);
+                }}
                 role="button"
-                // tabIndex="0"
+                tabIndex="0"
               >
-                {/* {questions.title} */}QuestionTitle
+                {questions?.title}
               </div>
               <UserInfo>
                 <div className="user-container">
                   <div className="user-name">
                     <span className="written-name">written&nbsp;by&nbsp;</span>
-                    {/* {questions.author.displayName} */}Me
+                    {/* 작성자 username 들어올 곳 */}
+                    {questions?.author.username}
                   </div>
                 </div>
               </UserInfo>

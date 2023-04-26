@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import questionCreateBg from "../../assets/images/questionCreateBg.svg";
 import AskQuestionForm from "../../components/AskQuestionForm";
-import { fetchCreate } from '../../utils/api';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { rendering } from '../../redux/renderSlice';
+import { fetchCreate } from "../../utils/api";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { rendering } from "../../redux/renderSlice";
 
 const QuestionCreatePage = styled.section`
   width: 100%;
@@ -84,18 +84,26 @@ const QuestionCreatePage = styled.section`
   }
 `;
 
-
 const AskQuestion = () => {
-  const [askTitle, askTitleSet] = useState('');
-  const [askBody, askBodySet] = useState('');
+  const [askTitle, askTitleSet] = useState("");
+  const [askBody, askBodySet] = useState("");
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = (title, content) => {
     const data = { title, content };
+<<<<<<< HEAD
     fetchCreate('https://3c1e-110-14-12-165.ngrok-free.app/api/questions', data);
+=======
+    fetchCreate(
+      "http://ec2-13-124-185-51.ap-northeast-2.compute.amazonaws.com:8080/api/questions",
+      data
+    );
+>>>>>>> ab0b642ee8252d61e0cdf27a53dedce636b72c22
     dispatch(rendering());
     // navigate('/');
-    // location.href = '/';
+    // eslint-disable-next-line no-restricted-globals
+    location.href = "/";
   };
   return (
     <>
@@ -133,11 +141,11 @@ const AskQuestion = () => {
             </div>
           </div>
           <AskQuestionForm
-          askTitle={askTitle}
-          askTitleSet={askTitleSet}
-          askBody={askBody}
-          askBodySet={askBodySet}
-          handleSubmit={handleSubmit}
+            askTitle={askTitle}
+            askTitleSet={askTitleSet}
+            askBody={askBody}
+            askBodySet={askBodySet}
+            handleSubmit={handleSubmit}
           />
         </div>
       </QuestionCreatePage>
