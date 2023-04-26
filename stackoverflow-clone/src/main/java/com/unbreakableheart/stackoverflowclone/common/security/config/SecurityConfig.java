@@ -28,20 +28,32 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeRequests()
-                .antMatchers("/api/signup").permitAll()
-                .antMatchers("/api/login").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .cors().configurationSource(corsConfigurationSource())
-                .and()
                 .httpBasic().disable()
                 .csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .authorizeRequests()
+                .antMatchers("/api/signup").permitAll()
+                .antMatchers("/api/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
                         UsernamePasswordAuthenticationFilter.class);
+//                .authorizeRequests()
+//                .antMatchers("/api/signup").permitAll()
+//                .antMatchers("/api/login").permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .cors().configurationSource(corsConfigurationSource())
+//                .and()
+//                .httpBasic().disable()
+//                .csrf().disable()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .and()
+//                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+//                        UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
 
