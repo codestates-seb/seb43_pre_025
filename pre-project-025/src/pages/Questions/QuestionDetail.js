@@ -1,5 +1,5 @@
-// import React, { useState, useEffect } from "react";
-// import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import styled from "styled-components";
@@ -81,12 +81,12 @@ const AnswersHeaderWrapper = styled.div`
   }
 `;
 
-const AnswersHeader = () => {
+const AnswersHeader = ({ count }) => {
   return (
     <AnswersHeaderWrapper>
-      {/* <h2 className="answer-count">
-        {count > 0 && count + (count === 1 ? ' answer' : ' answers')}
-      </h2> */}
+      <h2 className="answer-count">
+        {count > 0 && count + (count === 1 ? " answer" : " answers")}
+      </h2>
     </AnswersHeaderWrapper>
   );
 };
@@ -101,72 +101,77 @@ const YourAnswerHeader = styled.h2`
 `;
 
 const QuestionDetail = () => {
-  // const params = useParams();
-  // const url = 'https://ec62-110-14-12-165.ngrok-free.app/api/questions/' + [params.id];
-  // const [questionData, setQuestionData] = useState(null);
-  // const [isPending, setIsPending] = useState(false);
+  const params = useParams();
+  const url =
+    "https://7168-110-14-12-165.ngrok-free.app/api/questions/" + [params.id];
+  const [questionData, setQuestionData] = useState(null);
+  const [isPending, setIsPending] = useState(false);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.loginReducer);
 
-  // const handleAskQuestion = () => {
-  //   if (user) navigate('/ask');
-  //   else navigate('/login');
-  // };
+  const handleAskQuestion = () => {
+    if (user) navigate("/ask");
+    else navigate("/login");
+  };
 
-  // eslint-disable-next-line no-unused-vars
   const handleAnswerSubmit = (body) => {
     const data = { content: body };
-    axios(`https://ec62-110-14-12-165.ngrok-free.app/api/questions`, {
-      method: "post",
-      headers: {
-        Authorization: user.token,
-      },
-      data,
-    });
-    //     .then((res) => {
-    //       const newAnswer = { ...res.data, voteCount: 0 };
-    //       setQuestionData({
-    //         ...questionData,
-    //         answers: [...questionData.answers, newAnswer],
-    //       });
-    //     })
-    //     .catch((err) => console.error(err));
-    // };
+    axios(
+      `https://7168-110-14-12-165.ngrok-free.app/api/questions/${params.id}/answers`,
+      {
+        method: "post",
+        headers: {
+          Authorization: user.token,
+        },
+        data,
+      }
+    )
+      .then((res) => {
+        const newAnswer = { ...res.data, voteCount: 0 };
+        setQuestionData({
+          ...questionData,
+          answers: [...questionData.answers, newAnswer],
+        });
+      })
+      .catch((err) => console.error(err));
+  };
 
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     setIsPending(true);
-    //     try {
-    //       const res = await axios(url, {
-    //         headers: {
-    //           Authorization: user?.token,
-    //         },
-    //       });
-    //       setQuestionData({ ...res.data });
-    //     } catch (err) {
-    //       navigate('/notfound');
-    //       console.error(err);
-    //     }
-    //     setIsPending(false);
-    //   };
-    //   fetchData();
-    // }, [url]);
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsPending(true);
+      try {
+        const res = await axios(url, {
+          headers: {
+            Authorization: user?.token,
+          },
+        });
+        setQuestionData({ ...res.data });
+      } catch (err) {
+        navigate("/notfound");
+        console.error(err);
+      }
+      setIsPending(false);
+    };
+    fetchData();
+  }, [navigate, url, user?.token]);
 
-    // if (isPending && questionData === null) return <div>질문 불러오는 중...</div>;
-    // if (questionData) {
+  if (isPending && questionData === null) return <div>질문 불러오는 중...</div>;
+  if (questionData) {
     return (
       <Container>
         <div className="question-detail-container">
           <QuestionHeader>
-            <h1>{/* <a href="?">{questionData.title}</a> */}</h1>
+            <h1>
+              <a href="?">{questionData.title}</a>
+            </h1>
             <div className="ask-btn-container">
               <CommonButton
                 bgColor="var(--blue-500)"
                 color="#fff"
                 border="transparent"
                 onClick={() => {
-                  // handleAskQuestion();
+                  handleAskQuestion();
                 }}
                 className="ask-question-btn"
               >
@@ -175,34 +180,24 @@ const QuestionDetail = () => {
             </div>
           </QuestionHeader>
           <Content
-          // type="question"
-          // author={questionData.author}
-          // content={questionData.content}
-          // votes={questionData.voteCount}
-          // isUpVoter={questionData.isUpVoter}
-          // isDownVoter={questionData.isDownVoter}
-          // createdAt={questionData.createdAt}
-          // updatedAt={questionData.updatedAt}
-          // id={questionData.questionId}
-          // questionData={questionData}
-          // updateData={setQuestionData}
+            type="question"
+            author={questionData.author}
+            content={questionData.content}
+            id={questionData.questionId}
+            questionData={questionData}
+            updateData={setQuestionData}
           />
         </div>
-        {/* {questionData.answers.length > 0 && (
+        {questionData.answers.length > 0 && (
           <>
             <AnswersHeader count={questionData.answers.length} />
             {questionData.answers.map((answer) => {
               return (
                 <Content
-                  key={'answer' + answer.answerId}
+                  key={"answer" + answer.answerId}
                   type="answer"
                   author={answer.author}
                   content={answer.content}
-                  votes={answer.voteCount}
-                  isUpVoter={answer.isUpVoter}
-                  isDownVoter={answer.isDownVoter}
-                  createdAt={answer.createdAt}
-                  updatedAt={answer.updatedAt}
                   id={answer.answerId}
                   questionData={questionData}
                   updateData={setQuestionData}
@@ -210,13 +205,12 @@ const QuestionDetail = () => {
               );
             })}
           </>
-        )} */}
-        <AnswersHeader />
+        )}
         <YourAnswerHeader>Your Answer</YourAnswerHeader>
         <AnswerForm onClickHandler={handleAnswerSubmit} />
       </Container>
     );
-  };
+  }
 };
 
 export default QuestionDetail;
