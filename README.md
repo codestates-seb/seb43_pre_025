@@ -12,5 +12,5 @@ Codestates Pre-project-025 StackOverflow 클론코딩
 ```markdown
 |홍혜란(Fe)팀장|김정환|황동현|허윤영(Be팀장)|권순욱|박호제|
 |------|---|---|
-|<img src=https://user-images.githubusercontent.com/120001350/234779204-9d93885a-f659-42ae-9664-c50c92f500ba.jpeg/>|||
+||<img width="500" alt="kim" src="https://user-images.githubusercontent.com/120001350/234782174-41123ac8-db79-4958-a426-271af789027d.png">||
 ```
