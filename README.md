@@ -11,7 +11,7 @@ Codestates Pre-project-025 StackOverflow 클론코딩
 
 ## 기능 담당
 
-###FE <br/>
+FE <br/>
 홍혜란 = [header/login/signup/logout] <br/>
 김정환 = [nav/askquestion] <br/>
-황동현 = [questionslist/answer]
+황동현 = [questionslist/answer] <br/>
