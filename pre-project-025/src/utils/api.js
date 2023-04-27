@@ -22,7 +22,7 @@ export const fetchCreate = (url, data) => {
 
 export const fetchPatch = (url, data) => {
   axios(url, {
-    method: 'patch',
+    method: 'get',
     headers: {
       'Content-Type': 'application/json',
       Authorization: getLocalStorage().token,
