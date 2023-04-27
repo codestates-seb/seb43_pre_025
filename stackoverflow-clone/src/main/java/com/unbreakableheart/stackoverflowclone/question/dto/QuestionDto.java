@@ -1,6 +1,7 @@
 package com.unbreakableheart.stackoverflowclone.question.dto;
 
 import com.unbreakableheart.stackoverflowclone.answer.dto.AnswerDto;
+import com.unbreakableheart.stackoverflowclone.question.entity.Question;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,9 +40,11 @@ public class QuestionDto {
     public static class Response {
 
         private Long userId;
+        private String username;
         private Long questionId;
         private String title;
         private String content;
+        private String status;
 
 //        private List<Comment> comments;
 //
@@ -54,12 +57,14 @@ public class QuestionDto {
     @Getter
     @Setter
     @AllArgsConstructor
-    public static class SingleResponse{
+    public static class SingleResponse {
 
         private Long userId;
+        private String username;
         private Long questionId;
         private String title;
         private String content;
+        private String status;
         private List<AnswerDto.Response> answerResponses;
     }
 }

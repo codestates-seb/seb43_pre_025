@@ -44,6 +44,8 @@ public class AnswerService {
     public Answer updateAnswer(Answer answer, User user) {
         userService.findUserByEmail(user.getEmail());
         Answer findAnswer = findVerifyAnswer(answer.getAnswerId());
+        User authentication = userService.findUserByEmail(user.getEmail());
+        userService.isMatchUser(findAnswer.getUser(), authentication);
         Optional.ofNullable(answer.getContent())
                 .ifPresent(findAnswer::setContent);
         return answerRepository.save(findAnswer);
@@ -67,6 +69,9 @@ public class AnswerService {
     }
 
     public void deleteAnswer(long answerId, User user) {
-        answerRepository.delete(findAnswer(answerId, user));
+        Answer answer = findAnswer(answerId, user);
+        User authentication = userService.findUserByEmail(user.getEmail());
+        userService.isMatchUser(answer.getUser(), authentication);
+        answerRepository.delete(answer);
     }
 }

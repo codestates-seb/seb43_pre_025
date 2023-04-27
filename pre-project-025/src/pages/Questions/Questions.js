@@ -70,12 +70,12 @@ const Qusetions = ({ questions }) => {
       <QuestionContainer>
         <>
           <div className="container">
-            {/* <PostSummary
+            <PostSummary
               // 질문 투표 수
-              // voteNum={questions?.voteCount}
+              voteNum={questions?.voteCount}
               // 질문 답변 수
               answerNum={questions?.answerNum}
-            /> */}
+            />
             <div className="questions">
               <div
                 className="question-title"
@@ -85,14 +85,14 @@ const Qusetions = ({ questions }) => {
                 role="button"
                 tabIndex="0"
               >
-                {questions?.title}
+                {questions?.title}Token so hard
               </div>
               <UserInfo>
                 <div className="user-container">
                   <div className="user-name">
                     <span className="written-name">written&nbsp;by&nbsp;</span>
                     {/* 작성자 username 들어올 곳 */}
-                    {questions?.author.username}
+                    {questions?.author.username}Me
                   </div>
                 </div>
               </UserInfo>

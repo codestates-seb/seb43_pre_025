@@ -3,6 +3,7 @@ package com.unbreakableheart.stackoverflowclone.common.security.jwt;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +16,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
@@ -32,6 +34,12 @@ public class JwtTokenProvider {
     private final UserDetailsService userDetailsService;
     private final Long accessTokenExpiration = 1000L * 60 * 60;
     private final Long refreshTokenExpiration = 1000L * 60 * 60 * 60;
+    @Value("${jwt.access.header}")
+    @Getter
+    private String accessHeader;
+    @Value("${jwt.refresh.header}")
+    @Getter
+    private String refreshHeader;
 
     @PostConstruct
     public void init() {
@@ -88,7 +96,7 @@ public class JwtTokenProvider {
         return info;
     }
 
-    protected String resolveToken(HttpServletRequest request) {
+    public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
             return bearerToken.replace("Bearer ", "");
@@ -119,5 +127,13 @@ public class JwtTokenProvider {
             log.info("JWT claims string is empty.", e);
         }
         return false;
+    }
+
+    public void sendAccessAndRefreshToken(HttpServletResponse response, String accessToken, String refreshToken) {
+        response.setStatus(HttpServletResponse.SC_OK);
+
+        response.setHeader(accessHeader, accessToken);
+        response.setHeader(refreshHeader, refreshToken);
+        log.info("Access Token, Refresh Token 헤더 설정");
     }
 }
