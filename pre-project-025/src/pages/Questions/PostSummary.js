@@ -31,9 +31,9 @@ const PostSummary = ({ answerNum }) => {
   return (
     <PostSum>
       {/* 투표 수 보이는 곳 */}
-      {/* <span className="post-votes">1 votes</span> */}
+      <span className="post-votes">99 votes</span>
       {/* 답변 수 보이는 곳 */}
-      <span className="post-answers">{answerNum} answers</span>
+      <span className="post-answers">{answerNum}0 answers</span>
     </PostSum>
   );
 };
