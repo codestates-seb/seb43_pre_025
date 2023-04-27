@@ -9,7 +9,8 @@ Codestates Pre-project-025 StackOverflow 클론코딩
 
 ## 팀원
 
-|홍혜란 (FE 팀장)|김정환 (FE 팀원)|황동현 (FE 팀원)|허윤영 (BE 팀장)|권순욱 (BE 팀원)|박호제 (BE 팀원)|
-|:-:|:-:|:-:|:-:|:-:|
-|<img src="https://velog.velcdn.com/images/sangbin2/post/40523b88-00ae-4280-a486-5fdfb9383965/image.png" width=150>|<img src="https://user-images.githubusercontent.com/120001350/234782174-41123ac8-db79-4958-a426-271af789027d.png" width="300px" height="300px">|<img src="https://user-images.githubusercontent.com/6335046/188773314-b7b00c99-52bb-4a5b-94b3-0ed6f26bdcfd.png" width=150 >|<img src="https://user-images.githubusercontent.com/95295766/188778526-6a6175c7-ee3a-4f37-a269-3c64c53cf310.png" width=150>|<img src="https://user-images.githubusercontent.com/61177857/188779028-ed413724-de9b-4731-aa15-2aa02ee11bbe.jpg" width=150>|
-|[@Topbin2](https://github.com/Topbin2)|[@so191925](https://github.com/so191925)|[@ksheer506](https://github.com/ksheer506)|[@upqnu](https://github.com/upqnu)|[@soyoung96](https://github.com/soyoung96)|
+```markdown
+|홍혜란(Fe)팀장|김정환|황동현|허윤영(Be팀장)|권순욱|박호제|
+|------|---|---|
+|<img src="https://user-images.githubusercontent.com/120001350/234785065-fa894d42-4ccb-499b-958c-78d87529343b.PNG" width="100px" height="100px">|<img src="https://user-images.githubusercontent.com/120001350/234782174-41123ac8-db79-4958-a426-271af789027d.png" width="100px" height="100px">|<img src="https://user-images.githubusercontent.com/120001350/234783197-ef433377-b909-4e24-9edb-6f5270302fd8.png" width="100px" height="100px">||||
+```
