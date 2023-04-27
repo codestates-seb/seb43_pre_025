@@ -42,6 +42,7 @@ public class UserService {
     public User findUserByEmail(String email) {
         return findVerifyUser(email);
     }
+
     public User findUserById(long id) {
         return findVerifyUser(id);
     }
@@ -70,5 +71,12 @@ public class UserService {
     protected User findVerifyUser(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new CustomException(ExceptionCode.MEMBER_NOT_FOUND));
+    }
+
+    public boolean isMatchUser(User writing, User authentication) {
+        if(writing.getEmail().equals(authentication.getEmail())){
+            return true;
+        }
+        throw new CustomException(ExceptionCode.MEMBER_NOT_MATCH);
     }
 }
