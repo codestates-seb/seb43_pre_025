@@ -3,7 +3,7 @@ package com.unbreakableheart.stackoverflowclone.user.service;
 import com.unbreakableheart.stackoverflowclone.common.exception.CustomException;
 import com.unbreakableheart.stackoverflowclone.common.exception.ExceptionCode;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
-import com.unbreakableheart.stackoverflowclone.user.entity.UserDetailsImpl;
+import com.unbreakableheart.stackoverflowclone.user.entity.UserPrincipal;
 import com.unbreakableheart.stackoverflowclone.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 @Component
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class PrincipalDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -25,6 +25,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User user = userRepository.findByEmail(username).orElseThrow(() ->
                 new CustomException(ExceptionCode.MEMBER_NOT_FOUND));
 
-        return new UserDetailsImpl(user);
+        return UserPrincipal.of(user);
     }
 }

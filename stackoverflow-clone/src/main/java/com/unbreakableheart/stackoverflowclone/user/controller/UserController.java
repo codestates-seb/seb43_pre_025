@@ -3,12 +3,9 @@ package com.unbreakableheart.stackoverflowclone.user.controller;
 import com.unbreakableheart.stackoverflowclone.common.response.MultiResponse;
 import com.unbreakableheart.stackoverflowclone.common.response.SingleResponse;
 import com.unbreakableheart.stackoverflowclone.common.utils.UriCreator;
-import com.unbreakableheart.stackoverflowclone.user.dto.LoginDto;
-import com.unbreakableheart.stackoverflowclone.user.dto.LoginResponseDto;
 import com.unbreakableheart.stackoverflowclone.user.dto.UserDto;
 import com.unbreakableheart.stackoverflowclone.user.entity.User;
 import com.unbreakableheart.stackoverflowclone.user.mapper.UserMapper;
-import com.unbreakableheart.stackoverflowclone.user.service.LoginService;
 import com.unbreakableheart.stackoverflowclone.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,23 +20,16 @@ import static com.unbreakableheart.stackoverflowclone.common.utils.Constant.USER
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin
 @RequestMapping("/api")
 public class UserController {
 
     private final UserMapper userMapper;
     private final UserService userService;
-    private final LoginService loginService;
 
     @PostMapping(value = "/signup")
     public ResponseEntity<UserDto.Post> signUp(@RequestBody UserDto.Post post) {
         User user = userService.createUser(userMapper.postToUser(post));
         return ResponseEntity.created(UriCreator.createURI(USER_DEFAULT_URL, user.getId())).build();
-    }
-
-    @PostMapping(value = "/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginDto loginDto) {
-        return ResponseEntity.ok(loginService.login(loginDto));
     }
 
     @PatchMapping("user/{user-id}")
