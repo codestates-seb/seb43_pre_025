@@ -19,7 +19,7 @@ Codestates Pre-project-025 StackOverflow 클론코딩
 
 |홍혜란 (FE 팀장)|김정환 (FE 팀원)|황동현 (FE 팀원)|허윤영 (BE 팀장)|권순욱 (BE 팀원)|박호제 (BE 팀원)|
 |:-:|:-:|:-:|:-:|:-:|:-:|
-|Header <br/> Login <br/> Signup <br/> Logout <br/>| Nav <br/> AskQuestion <br/>|QuestionsList <br/> Answer <br/>||||
+|Header <br/> Login <br/> Signup <br/> Logout <br/>| Nav <br/> AskQuestion <br/>|QuestionsList <br/> Answer <br/>|Answer<br/>Security<br/>|AWS 배포<br>Question Tag<br>Question</br>Security|OAuth<br>Security</br>Error Handler </br> Log-in, Sign-up|
 
 <br>
 
@@ -32,6 +32,10 @@ Codestates Pre-project-025 StackOverflow 클론코딩
 <br>
 
 ## back-end 진행사항
+
+- JWT, OAuth2.0을 이용한 로그인 구현
+- 질문, 답변, 질문 태그 등록 구현
+- AWS를 이용한 서버 배포
 
 <br><br><br>
 
